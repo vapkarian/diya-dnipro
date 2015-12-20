@@ -1,0 +1,9 @@
+.idea
+*.pyc
+db/
+env/
+logs/
+pids/
+static_content/
+settings_local.py
+.coverage

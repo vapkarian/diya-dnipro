@@ -1,0 +1,28 @@
+{% extends "misc/base.html" %}{% load static from staticfiles %}
+{% block extrahead %}
+    <script async src="{% static 'misc/js/assets.min.js' %}"></script>
+{% endblock %}
+{% block content %}
+    {% if top_articles %}
+        <div class="main_slider" data-rotation="target: .slides > div; pickerItems:.picker > div; interval: 5;">
+            <div class="slides">
+                {% for article in top_articles %}
+                    <div {% if forloop.first %}class="active"{% endif %}>
+                        <div class="title">
+                            <a class="txt" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                        </div>
+                        <img src="{{ article.top_image_url|default:article.main_image_url }}" alt="{{ article.title }}"
+                             width="727" height="378"/>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="picker">
+                <span class="caption">ТОП</span>
+                {% for article in top_articles %}
+                    <div data-pos="{{ forloop.counter }}" {% if forloop.first %}class="active"{% endif %}>&nbsp;</div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    {% include 'news/parts/news-list.html' with articles=articles extra_classes='dark' only %}
+{% endblock content %}

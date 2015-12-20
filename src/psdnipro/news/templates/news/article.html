@@ -1,0 +1,29 @@
+{% extends "misc/base.html" %}{% load static from staticfiles %}
+{% block content %}
+    <article>
+        <div class="row">
+            <a href="{{ object.category.get_absolute_url }}" class="article-category">{{ object.category.title }}</a>
+            <div class="article-time">{{ object.created|date:"H:i" }}</div>
+            <div class="article-date">{{ object.created|date:"d.m.Y" }}</div>
+        </div>
+        <div class="row">
+            <a class="article-image" href="{{ article.main_image_url }}" target="_blank">
+                <img alt="Зображення" src="{{ article.main_image_url }}"/>
+            </a>
+            <div class="article-title">{{ article.title }}</div>
+            <div class="article-text">
+                {% autoescape on %}
+                    {{ article.text | linebreaksbr }}
+                {% endautoescape %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="article-other-images">
+                {% for elem in article.images.all %}
+                    {{ elem.preview }}
+                {% endfor %}
+            </div>
+        </div>
+    </article>
+    {% include 'news/parts/news-list.html' with articles=same_articles extra_classes='dark' only %}
+{% endblock content %}

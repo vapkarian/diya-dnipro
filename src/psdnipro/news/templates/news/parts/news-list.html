@@ -1,0 +1,21 @@
+<div class="news-list {{ extra_classes }}">
+    {% for article in articles %}
+        <div class="article-preview">
+            <div class="left-side">
+                <a href="{{ article.get_absolute_url }}">
+                    <img alt="Зображення" src="{{ article.main_image_url }}" width="127" height="95"/>
+                </a>
+                <div class="short-article-datetime">
+                    <div class="short-article-time">{{ article.created|date:"H:i" }}</div>
+                    <div class="short-article-date">{{ article.created|date:"d.m.Y" }}</div>
+                </div>
+            </div>
+            <div class="right-side">
+                <a href="{{ article.get_absolute_url }}">
+                    <div class="article-title">{{ article.title }}</div>
+                </a>
+                <div class="article-text">{{ article.text|slice:":100" }}...</div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

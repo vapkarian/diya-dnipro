@@ -1,0 +1,146 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=1050, initial-scale=1">
+    <title>
+        {% block title %}Правий Сектор{% endblock title %}
+    </title>
+    <link rel="shortcut icon" href="{% static 'misc/icons/favicon.ico' %}" type="image/vnd.microsoft.icon"/>
+    <script src="{% static 'misc/js/jquery.min.js' %}"></script>
+    <link href="{% static 'misc/css/main.css' %}" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <link href="/static/css/ie-style.min.css" rel="stylesheet" />
+        <script type="text/javascript">
+            document.createElement('header');
+            document.createElement('nav');
+            document.createElement('article');
+            document.createElement('footer');
+            document.createElement('section');
+        </script>
+    <![endif]-->
+    <script type="text/javascript">
+        $(function () {
+            var nav_items_selector = 'header nav ul li.nav-item';
+            setInterval(function () {
+                $(nav_items_selector + ':not(:hover)').removeClass('hovered')
+            }, 1000);
+            $(nav_items_selector).hover(function () {
+                var $this = $(this);
+                $(nav_items_selector).removeClass('hovered');
+                $this.addClass('hovered');
+            });
+        });
+    </script>
+    {% block extrahead %}{% endblock extrahead %}
+</head>
+<body>
+<header>
+    <div class="row above"></div>
+    <div class="row middle">
+        <div class="wrapper-in">
+            <a href="{% url 'news:home' %}">
+                <div class="logo" title="Слава Україні!"></div>
+                <div class="title">
+                    Правий Сектор <span class="city">Дніпро</span>
+                </div>
+            </a>
+            <div class="icons">
+                <a class="f" href="{{ facebook_url }}" title="{{ facebook_url }}"></a>
+                <a class="v" href="{{ vkontakte_url }}" title="{{ vkontakte_url }}"></a>
+                <a class="mail" href="mailto:{{ mail_url }}" title="{{ mail_url }}"></a>
+                {% if request.user.is_beta %}
+                    <a class="cart" href="#"></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="row below">
+        <nav class="wrapper-in visible">
+            <ul>
+                <li class="nav-item home">
+                    <a href="{% url 'news:home' %}">Головна</a>
+                </li>
+                {% for elem in navigation_links %}
+                    <li class="nav-item" id="a1">
+                        {{ elem.title }}
+                        <ul>
+                            <li><a href="{{ elem.get_absolute_url }}">Новини</a></li>
+                            <li><a href="#">Команда</a></li>
+                            <li><a href="#">Документи</a></li>
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</header>
+<div id="main">
+    <div class="wrapper-in">
+        <div class="content">{% block content %}{% endblock content %}</div>
+        <div class="right-column">
+            <div class="last-news">
+                <div class="row">
+                    <div class="news-title">Новини</div>
+                    <a href="{% url 'news:home' %}">
+                        <div class="all-news-link">Усі новини</div>
+                    </a>
+                </div>
+                {% for article in last_articles %}
+                    <div class="row">
+                        <div class="short-article-datetime">
+                            <div class="short-article-time">{{ article.created|date:"H:i" }}</div>
+                            <div class="short-article-date">{{ article.created|date:"d.m.Y" }}</div>
+                        </div>
+                        <a href="{{ article.get_absolute_url }}" class="short-article-title"
+                           title="{{ article.title }}">{{ article.title }}</a>
+                    </div>
+                    <hr class="row short-article-delimiter">
+                {% endfor %}
+            </div>
+            <div class="notice">
+                {% block notice %}
+                    <img src="{% static 'misc/img/blokada.jpg' %}" width="353px" alt="Допомога ПС" title="Допомога ПС">
+                {% endblock notice %}
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="row above"></div>
+    <div class="row below">
+        <div class="wrapper-in">
+            <div class="logo-icons">
+                <a href="{% url 'news:home' %}">
+                    <div class="logo" title="Героям слава!"></div>
+                    <div class="title">
+                        Правий Сектор <span class="city">Дніпро</span>
+                    </div>
+                </a>
+                <div class="icons">
+                    <a class="f" href="{{ facebook_url }}" title="{{ facebook_url }}"></a>
+                    <a class="v" href="{{ vkontakte_url }}" title="{{ vkontakte_url }}"></a>
+                    <a class="mail" href="mailto:{{ mail_url }}" title="{{ mail_url }}"></a>
+                </div>
+            </div>
+            <div class="copyright-legal">
+                <div class="copyright">
+                    {# TODO: change 2016 to {% now "Y" %} #}
+                    © 2015 - 2016 Правий сектор
+                </div>
+                <div class="legal">
+                    Передрук та інше використання матеріалів, що розмщені на сайті, дозволяється за умови посилання
+                    на {{ request.get_host }}. Інтернет-видання можуть використовувати матеріали сайту за умови
+                    гіперпосилання на {{ request.get_host }}.
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
