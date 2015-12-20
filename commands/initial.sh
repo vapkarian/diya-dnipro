@@ -62,6 +62,3 @@ mkdir ${DIR}/static_content/media
 
 # Create virtual environment for Python packages
 virtualenv -p ${PYTHON_EXECUTABLE} --prompt="<env>" ${DIR}/env
-
-# Run deploy script
-${DIR}/commands/deploy.sh --env=${ENVIRONMENT} -no-pull
