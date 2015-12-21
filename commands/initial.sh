@@ -50,7 +50,7 @@ cd ${DIR}
 
 # Install dependencies
 ${PACKAGE_MANAGER_COMMAND} $(cat ${DIR}/requirements/os/common.txt)
-if [ -r ${DIR}/os-requirements/${ENVIRONMENT}.txt ]; then
+if [ -r ${DIR}/requirements/os/${ENVIRONMENT}.txt ]; then
     ${PACKAGE_MANAGER_COMMAND} $(cat ${DIR}/requirements/os/${ENVIRONMENT}.txt)
 fi
 
