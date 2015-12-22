@@ -219,7 +219,7 @@ header .nav-item {
     margin-top: 3px;
     background-color: #9c1c1b;
     border-radius: 25px;
-    padding: 17px 60px 13px 20px;
+    padding: 17px 50px 13px 10px;
     cursor: default;
 }
 
@@ -233,7 +233,6 @@ header .nav-item.hovered {
 
 header .nav-item.home {
     background: none;
-    padding: 15px;
 }
 
 footer .logo-icons {
