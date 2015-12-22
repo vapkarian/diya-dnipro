@@ -1,0 +1,17 @@
+{% extends "misc/base.html" %}{% load static from staticfiles %}
+{% block content %}
+    <article>
+        <div class="row">
+            <a class="member-photo" href="{{ object.photo.url }}" target="_blank">
+                <img alt="Зображення" src="{{ object.photo.url }}"/>
+            </a>
+            <div class="member-name">{{ object.name }}</div>
+            <div class="member-position">{{ object.position }}</div>
+            <div class="member-bio">
+                {% autoescape on %}
+                    {{ object.bio | linebreaksbr }}
+                {% endautoescape %}
+            </div>
+        </div>
+    </article>
+{% endblock content %}

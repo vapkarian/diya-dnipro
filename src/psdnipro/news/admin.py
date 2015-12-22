@@ -1,5 +1,5 @@
 from django.contrib import admin
-from psdnipro.news.models import Image, Category, Article
+from psdnipro.news.models import Image, Category, Article, TeamMember
 
 
 __all__ = [
@@ -25,9 +25,8 @@ class ImageAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_active')
-    list_filter = ('is_active',)
-    ordering = ('priority_order',)
+    list_display = ('title', 'url')
+    ordering = ('id',)
     save_on_top = True
 
     def has_delete_permission(self, request, obj=None):
@@ -105,3 +104,22 @@ class ArticleAdmin(admin.ModelAdmin):
 
     images_previews.allow_tags = True
     images_previews.short_description = 'Попередній перегляд'
+
+
+@admin.register(TeamMember)
+class TeamMemberAdmin(admin.ModelAdmin):
+    list_display = ('name', 'position', 'category')
+    list_filter = ('category',)
+    list_select_related = ('category',)
+    ordering = ('id',)
+    save_on_top = True
+
+    def has_delete_permission(self, request, obj=None):
+        """
+        Prevent deleting objects by admins.
+
+        :param django.http.HttpRequest request: metadata about request
+        :param psdnipro.news.models.Category obj: instance
+        :rtype bool
+        """
+        return False

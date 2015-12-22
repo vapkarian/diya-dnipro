@@ -1,0 +1,14 @@
+{% extends "misc/base.html" %}{% load static from staticfiles %}
+{% block content %}
+    <h1>{{ category.title }}</h1>
+    <div class="members-list">
+        {% for member in team_members %}
+            <div class="member">
+                <a href="{{ member.get_absolute_url }}">
+                    <img alt="Зображення" src="{{ member.photo.url }}" width="200" height="200"/>
+                    <div class="member-name">{{ member.name }}</div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

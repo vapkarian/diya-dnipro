@@ -28,7 +28,7 @@
         $(function () {
             var nav_items_selector = 'header nav ul li.nav-item';
             setInterval(function () {
-                $(nav_items_selector + ':not(:hover)').removeClass('hovered')
+                $(nav_items_selector + ':not(:hover)').removeClass('hovered');
             }, 1000);
             $(nav_items_selector).hover(function () {
                 var $this = $(this);
@@ -67,12 +67,11 @@
                     <a href="{% url 'news:home' %}">Головна</a>
                 </li>
                 {% for elem in navigation_links %}
-                    <li class="nav-item" id="a1">
+                    <li class="nav-item">
                         {{ elem.title }}
                         <ul>
-                            <li><a href="{{ elem.get_absolute_url }}">Новини</a></li>
-                            <li><a href="#">Команда</a></li>
-                            <li><a href="#">Документи</a></li>
+                            <li><a href="{% url 'news:news' url=elem.url %}">Новини</a></li>
+                            <li><a href="{% url 'news:team' url=elem.url %}">Команда</a></li>
                         </ul>
                     </li>
                 {% endfor %}

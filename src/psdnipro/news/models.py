@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 
 
 __all__ = [
-    'Image', 'Category', 'Article',
+    'Image', 'Category', 'Article', 'TeamMember',
 ]
 
 
@@ -36,8 +36,6 @@ class Image(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=64, verbose_name='Назва')
     url = models.CharField(max_length=128, verbose_name='Посилання')
-    priority_order = models.PositiveSmallIntegerField(unique=True)
-    is_active = models.BooleanField(default=True, verbose_name='Показувати?')
 
     class Meta:
         verbose_name = 'запис категорії'
@@ -47,7 +45,7 @@ class Category(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('news:category', args=(self.url,))
+        return reverse('news:news', args=(self.url,))
 
 
 class Article(models.Model):
@@ -107,3 +105,21 @@ class Article(models.Model):
         :rtype: list[str]
         """
         return [elem.url for elem in self.images.all()]
+
+
+class TeamMember(models.Model):
+    name = models.CharField(max_length=128, verbose_name="Ім'я")
+    position = models.CharField(max_length=128, verbose_name='Посада')
+    photo = models.ImageField(upload_to='photos/', verbose_name='Світлина')
+    bio = models.TextField(blank=True, verbose_name='Анкета')
+    category = models.ForeignKey(Category, verbose_name='Категорія')
+
+    class Meta:
+        verbose_name = 'запис персони'
+        verbose_name_plural = 'Персони'
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('news:member', args=(self.id,))

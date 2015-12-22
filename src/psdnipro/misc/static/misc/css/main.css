@@ -544,6 +544,59 @@ footer .legal {
     line-height: 22px;
 }
 
+.content .members-list {
+    overflow: hidden;
+    float: left;
+    width: 748px;
+    margin-top: 20px;
+}
+
+.content .members-list .member {
+    float: left;
+    width: 200px;
+    height: 245px;
+    margin: 20px;
+    box-sizing: border-box;
+    overflow: hidden
+}
+
+.content .members-list .member .member-name {
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    color: white;
+    text-decoration: underline;
+}
+
+.content article .member-photo {
+    float: left;
+    padding: 0 15px 15px 0;
+}
+
+.content article .member-name {
+    text-transform: uppercase;
+    font-family: "Blagovest", "Times New Roman", serif;
+    font-size: 16pt;
+    line-height: 28px;
+    margin-bottom: 15px;
+}
+
+.content article .member-position {
+    text-transform: uppercase;
+    font-family: "Times New Roman", serif;
+    font-size: 16pt;
+    font-weight: bold;
+    line-height: 28px;
+    margin-bottom: 15px;
+}
+
+.content article .member-bio {
+    font-family: "Times New Roman", serif;
+    font-size: 12pt;
+    font-weight: bold;
+    line-height: 22px;
+}
+
 /*
 // SLIDE BAR //
 */

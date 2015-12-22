@@ -8,7 +8,7 @@ def navigation_links(request):
     :param django.http.HttpRequest request: metadata about request
     :rtype: dict
     """
-    return {'navigation_links': Category.objects.filter(is_active=True).order_by('priority_order')}
+    return {'navigation_links': Category.objects.order_by('id')}
 
 
 def last_articles(request):
@@ -23,9 +23,9 @@ def last_articles(request):
 
 def top_articles(request):
     """
-    List of last articles for all-news section.
+    List of top articles for TOP slide-bar.
 
     :param django.http.HttpRequest request: metadata about request
     :rtype: dict
     """
-    return {'top_articles': Article.objects.filter(is_active=True, is_top=True).order_by('-created')}
+    return {'top_articles': Article.objects.filter(is_active=True, is_top=True).order_by('-created')[:4]}
