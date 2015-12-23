@@ -2,37 +2,37 @@
 	"name": "\u041f\u0421 \u0414\u043d\u0456\u043f\u0440\u043e",
 	"icons": [
 		{
-			"src": "\/static\/misc\/icons\/android-chrome-36x36.png",
+			"src": "\/static\/misc\/favicons\/android-chrome-36x36.png",
 			"sizes": "36x36",
 			"type": "image\/png",
 			"density": 0.75
 		},
 		{
-			"src": "\/static\/misc\/icons\/android-chrome-48x48.png",
+			"src": "\/static\/misc\/favicons\/android-chrome-48x48.png",
 			"sizes": "48x48",
 			"type": "image\/png",
 			"density": 1
 		},
 		{
-			"src": "\/static\/misc\/icons\/android-chrome-72x72.png",
+			"src": "\/static\/misc\/favicons\/android-chrome-72x72.png",
 			"sizes": "72x72",
 			"type": "image\/png",
 			"density": 1.5
 		},
 		{
-			"src": "\/static\/misc\/icons\/android-chrome-96x96.png",
+			"src": "\/static\/misc\/favicons\/android-chrome-96x96.png",
 			"sizes": "96x96",
 			"type": "image\/png",
 			"density": 2
 		},
 		{
-			"src": "\/static\/misc\/icons\/android-chrome-144x144.png",
+			"src": "\/static\/misc\/favicons\/android-chrome-144x144.png",
 			"sizes": "144x144",
 			"type": "image\/png",
 			"density": 3
 		},
 		{
-			"src": "\/static\/misc\/icons\/android-chrome-192x192.png",
+			"src": "\/static\/misc\/favicons\/android-chrome-192x192.png",
 			"sizes": "192x192",
 			"type": "image\/png",
 			"density": 4
