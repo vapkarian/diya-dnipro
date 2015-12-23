@@ -45,7 +45,7 @@ class Category(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('news:news', args=(self.url,))
+        return reverse('news:category', args=(self.url,))
 
 
 class Article(models.Model):
