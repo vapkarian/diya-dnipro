@@ -1,2 +1,3 @@
 nginx
-supervisor
+libpcre3
+libpcre3-dev
