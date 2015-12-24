@@ -55,6 +55,7 @@ if [ -r ${DIR}/requirements/os/${ENVIRONMENT}.txt ]; then
 fi
 
 # Create necessary project directories
+mkdir ${DIR}/configs
 mkdir ${DIR}/logs
 mkdir ${DIR}/pids
 mkdir ${DIR}/static_content
