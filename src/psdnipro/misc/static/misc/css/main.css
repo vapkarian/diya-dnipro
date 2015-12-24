@@ -75,7 +75,8 @@ header .row.staff {
     font-family: "Times NewRoman", serif;
     font-size: 14pt;
     font-weight: bold;
-    color: #00001b;
+    color: white;
+    background-color: #1b1b1b;;
     padding: 10px;
     text-align: center;
 }
@@ -216,6 +217,13 @@ header a {
     font-weight: bold;
     font-size: 16pt;
     color: white;
+}
+
+header .staff a {
+    font-size: 14pt;
+    font-weight: bold;
+    color: white;
+    text-decoration: underline;
 }
 
 header .nav-item {
