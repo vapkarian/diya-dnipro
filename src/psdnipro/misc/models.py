@@ -9,7 +9,8 @@ class SiteSetting(models.Model):
     Key-value storage unit.
     """
     SECTIONS = (
-        (0, 'General'),
+        (0, 'Загальне'),
+        (1, 'Зовнішні посилання'),
     )
     TYPES = (
         (0, 'Текст'),
@@ -38,7 +39,6 @@ class SiteSetting(models.Model):
         :param dict kwargs: keyword arguments
         """
         cache.delete(SiteSetting.cached_key(self.key))
-        print('SAVE!')
         return super(SiteSetting, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
@@ -49,7 +49,6 @@ class SiteSetting(models.Model):
         :param dict kwargs: keyword arguments
         """
         cache.delete(SiteSetting.cached_key(self.key))
-        print('DELETE!')
         return super(SiteSetting, self).delete(*args, **kwargs)
 
     @classmethod
