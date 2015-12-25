@@ -14,7 +14,7 @@
                 <a href="{{ article.get_absolute_url }}">
                     <div class="article-title">{{ article.title }}</div>
                 </a>
-                <div class="article-text">{{ article.text|striptags|slice:":100" }}...</div>
+                <div class="article-text">{{ article.text|striptags|safe|slice:":100" }}...</div>
             </div>
         </div>
     {% endfor %}
