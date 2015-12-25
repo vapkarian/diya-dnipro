@@ -1,12 +1,12 @@
 # .coveragerc to control coverage.py
 [run]
 branch = True
-omit = src/manage.py,
-       src/completecase/settings.py,
-       src/completecase/settings_local.py,
-       src/completecase/wsgi.py,
-       src/completecase/profiler.py,
-       src/completecase/celery.py,
+omit = manage.py,
+       settings.py,
+       settings_local.py,
+       wsgi.py,
+       profiler.py,
+       celery.py,
        */migrations/*,
        */tests.py,
        */__init__.py

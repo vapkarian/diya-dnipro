@@ -1,10 +1,10 @@
 .idea
 *.pyc
-db/
-env/
-configs/
-logs/
-pids/
-static_content/
 settings_local.py
-.coverage
+/db/
+/configs/
+/env/
+/logs/
+/pids/
+/static_content/
+/.coverage
