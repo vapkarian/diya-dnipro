@@ -473,6 +473,8 @@ footer .legal {
 
 .content .news-list .article-preview img {
     border: 0;
+    min-height: 65px;
+    max-height: 95px;
 }
 
 .content .news-list .article-preview .article-title {
@@ -555,8 +557,11 @@ footer .legal {
 .content article .article-text {
     font-family: "Times New Roman", serif;
     font-size: 12pt;
-    font-weight: bold;
     line-height: 22px;
+}
+
+.content article .article-text p {
+    margin-bottom: 10px;
 }
 
 .content .members-list {
@@ -660,6 +665,10 @@ footer .legal {
     color: #fff;
     font-size: 21pt;
     margin-bottom: 10px;
+}
+
+.main_slider > .slides > div > img {
+    min-height: 378px;
 }
 
 .main_slider > .slides > div.active {

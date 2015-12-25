@@ -23,7 +23,8 @@ admin.site.site_header = admin.site.site_title = 'Файна адмінка'
 
 urlpatterns = [
     url(r'^ps-admin/', admin.site.urls),
-    url(r'^', include('psdnipro.news.urls', namespace='news'))
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^', include('psdnipro.news.urls', namespace='news')),
 ]
 
 if settings.DEBUG:

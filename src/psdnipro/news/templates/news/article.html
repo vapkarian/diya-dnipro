@@ -8,21 +8,14 @@
             <div class="article-date">{{ object.created|date:"d.m.Y" }}</div>
         </div>
         <div class="row">
-            <a class="article-image" href="{{ object.main_image_url }}" target="_blank">
-                <img alt="Зображення" src="{{ object.main_image_url }}"/>
+            <a class="article-image" href="{{ object.image_url }}" target="_blank">
+                <img alt="Зображення" src="{{ object.image_url }}"/>
             </a>
             <div class="article-title">{{ object.title }}</div>
             <div class="article-text">
                 {% autoescape on %}
-                    {{ object.text | linebreaksbr }}
+                    {{ object.text | safe }}
                 {% endautoescape %}
-            </div>
-        </div>
-        <div class="row">
-            <div class="article-other-images">
-                {% for elem in object.images.all %}
-                    {{ elem.preview }}
-                {% endfor %}
             </div>
         </div>
     </article>

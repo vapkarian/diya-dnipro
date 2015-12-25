@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
+    'ckeditor_uploader',
     'dbdump',
     'psdnipro.accounts',
     'psdnipro.misc',
@@ -145,6 +147,33 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono',
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
+        ],
+        'toolbar_Full': [
+            ['Undo', '-', 'Redo'],
+            ['TextColor', '-', 'BGColor'],
+            ['Bold', '-', 'Italic', '-', 'Underline', '-', 'Strike'],
+            ['JustifyLeft', '-', 'JustifyCenter', '-', 'JustifyRight', '-', 'JustifyBlock'],
+            ['NumberedList', '-', 'BulletedList'],
+            ['Link', '-', 'Unlink'],
+            ['Image', '-', 'Iframe'],
+            ['Source'],
+        ],
+        'toolbar': 'Full',
+        'height': 291,
+        'width': 835,
+        'filebrowserWindowWidth': 940,
+        'filebrowserWindowHeight': 725,
+    }
+}
 
 try:
     from psdnipro.settings_local import *

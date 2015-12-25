@@ -12,8 +12,7 @@
                         <div class="title">
                             <a class="txt" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
                         </div>
-                        <img src="{{ article.top_image_url|default:article.main_image_url }}" alt="{{ article.title }}"
-                             width="727" height="378"/>
+                        <img src="{{ article.image_url }}" alt="{{ article.title }}" width="727"/>
                     </div>
                 {% endfor %}
             </div>
