@@ -17,13 +17,19 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include, url, static
 from django.contrib import admin
+from django.views.generic import TemplateView
+
+from psdnipro.sitemaps import SITEMAPS
 
 
 admin.site.site_header = admin.site.site_title = 'Файна адмінка'
 
 urlpatterns = [
     url(r'^ps-admin/', admin.site.urls),
-    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^ps-admin/ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^robots\.txt$', TemplateView.as_view(template_name='misc/robots.txt', content_type='text/plain'),
+        name='robots'),
+    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': SITEMAPS}, name='sitemap'),
     url(r'^', include('psdnipro.news.urls', namespace='news')),
 ]
 
