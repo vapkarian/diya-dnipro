@@ -1,11 +1,11 @@
 from django.shortcuts import get_object_or_404
-from django.views.generic import View, ListView, DetailView
+from django.views.generic import ListView, DetailView
 
 from psdnipro.news.models import Article, Category, TeamMember
 
 
 __all__ = [
-    'HomeView', 'CategoryView', 'ArticleView'
+    'HomeView', 'CategoryView', 'ArticleView',
 ]
 
 
@@ -36,8 +36,10 @@ class CategoryView(ListView):
         return context
 
     def get_queryset(self):
-        qs = Article.objects.filter(category=self.category, is_active=True).order_by('-created')
-        return qs
+        queryset = Article.objects \
+            .filter(category=self.category, is_active=True) \
+            .order_by('-created')
+        return queryset
 
 
 class ArticleView(DetailView):
@@ -47,9 +49,16 @@ class ArticleView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ArticleView, self).get_context_data(**kwargs)
-        same = Article.objects.filter(category=self.object.category, is_active=True).order_by('-created')[:6]
-        context['same_articles'] = same
+        same = Article.objects \
+            .filter(category=self.object.category, is_active=True) \
+            .exclude(pk=self.object.pk) \
+            .order_by('-created')
+        context['same_articles'] = same[:6]
         return context
+
+    def get_queryset(self):
+        queryset = Article.objects.filter(is_active=True)
+        return queryset
 
 
 class TeamView(ListView):
@@ -68,8 +77,8 @@ class TeamView(ListView):
         return context
 
     def get_queryset(self):
-        qs = TeamMember.objects.filter(category=self.category).order_by('id')
-        return qs
+        queryset = TeamMember.objects.filter(category=self.category).order_by('id')
+        return queryset
 
 
 class TeamMemberView(DetailView):
