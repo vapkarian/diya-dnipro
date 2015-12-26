@@ -1,5 +1,5 @@
-{% extends "misc/base.html" %}{% load static from staticfiles %}
-{% block title %}Головна | Правий Сектор{% endblock title %}
+{% extends "base.html" %}{% load static from staticfiles %}
+{% block title %}Головна | {{ block.super }}{% endblock title %}
 {% block extra-js %}
     <script src="{% static 'misc/js/assets.js' %}" defer></script>
 {% endblock extra-js %}

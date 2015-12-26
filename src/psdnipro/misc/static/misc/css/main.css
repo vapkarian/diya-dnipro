@@ -409,15 +409,43 @@ footer .legal {
     height: 271px;
 }
 
-.content h1 {
-    font-family: "Blagovest", "Times New Roman", serif;
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
     text-align: center;
     height: 85px;
     line-height: 100px;
     color: white;
     text-transform: uppercase;
-    font-size: 30pt;
     font-weight: bold;
+}
+
+.content h1 {
+    font-family: "Blagovest", "Times New Roman", serif;
+    font-size: 30pt;
+}
+
+.content h2 {
+    font-size: 24pt;
+}
+
+.content h3 {
+    font-size: 28pt;
+}
+
+.content h4 {
+    font-size: 14pt;
+}
+
+.content h5 {
+    font-size: 13pt;
+}
+
+.content h6 {
+    font-size: 12pt;
 }
 
 .pagination {

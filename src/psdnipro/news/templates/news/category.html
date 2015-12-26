@@ -1,5 +1,5 @@
-{% extends "misc/base.html" %}
-{% block title %}{{ category.title }} - Новини | Правий Сектор{% endblock title %}
+{% extends "base.html" %}
+{% block title %}{{ category.title }} - Новини | {{ block.super }}{% endblock title %}
 {% block content %}
     <h1>{{ category.title }}</h1>
     {% include 'news/parts/news-list.html' with article_list=article_list only %}

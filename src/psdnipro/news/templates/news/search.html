@@ -1,5 +1,5 @@
-{% extends "misc/base.html" %}
-{% block title %}Результати пошуку | Правий Сектор{% endblock title %}
+{% extends "base.html" %}
+{% block title %}Результати пошуку | {{ block.super }}{% endblock title %}
 {% block content %}
     <h1>Результати пошуку</h1>
     {% include 'news/parts/news-list.html' with article_list=article_list only %}
