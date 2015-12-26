@@ -100,6 +100,7 @@ fi
 
 # Update existed and install new Python packages
 if [ "${UPDATE}" = true ]; then
+    rm -rf ${DIR}/env/src
     ${DIR}/env/bin/pip install --requirement=${DIR}/requirements/virtualenv/${ENVIRONMENT}.txt \
         --log=${DIR}/logs/build_pip_packages.log --log-file=${DIR}/logs/build_pip_packages_failures.log
 fi
@@ -111,7 +112,9 @@ fi
 
 # Collect static files (img, css, js)
 if [ "${COLLECTSTATIC}" = true ]; then
+    rm -r ${DIR}/static_content/static
     ${DIR}/env/bin/python ${DIR}/src/manage.py collectstatic --noinput
+    ${DIR}/env/bin/python ${DIR}/src/manage.py compress
 fi
 
 # Update project by touching wsgi file

@@ -1,8 +1,9 @@
 Django==1.9
-# celery==3.1.19
 python-memcached==1.57
 psycopg2==2.6.1
 Pillow==3.0.0
 ipython==4.0.1
 -e git+git://github.com/vapkarian/django-dbdump.git#egg=django-dbdump
 django_ckeditor==5.0.2
+slimit==0.8.1
+-e git+git://github.com/django-compressor/django-compressor.git#egg=django-compressor

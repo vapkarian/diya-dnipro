@@ -47,7 +47,6 @@ class SearchView(ListView):
 
     def dispatch(self, request, *args, **kwargs):
         self.search_query = self.request.GET.get('search', '')
-        print(self.request.GET.urlencode())
         return super(SearchView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

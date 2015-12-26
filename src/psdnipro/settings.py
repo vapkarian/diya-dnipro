@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'compressor',
     'ckeditor',
     'ckeditor_uploader',
     'dbdump',
@@ -174,6 +175,25 @@ CKEDITOR_CONFIGS = {
         'filebrowserWindowHeight': 725,
     }
 }
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+]
+
+COMPRESS_OUTPUT_DIR = 'cache'
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.datauri.CssDataUriFilter',
+    'compressor.filters.cssmin.rCSSMinFilter',
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
+    'compressor.filters.jsmin.SlimItFilter',
+]
+COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
+
 
 try:
     from psdnipro.settings_local import *

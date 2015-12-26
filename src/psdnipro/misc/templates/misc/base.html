@@ -1,4 +1,4 @@
-{% load static from staticfiles %}
+{% load static from staticfiles %}{% load compress %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +28,11 @@
     <meta name="msapplication-TileImage" content="{% static 'misc/favicons/mstile-144x144.png' %}">
     <meta name="msapplication-config" content="{% static 'misc/favicons/browserconfig.xml' %}">
     <meta name="theme-color" content="#000000' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'misc/css/reset.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'misc/css/main.css' %}" />
+    {% compress css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'misc/css/reset.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'misc/css/main.css' %}" />
+        {% block extra-css %}{% endblock extra-css %}
+    {% endcompress %}
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
         <script src="{% static 'misc/js/html5shiv.min.js' %}"></script>
@@ -43,9 +46,11 @@
             document.createElement('section');
         </script>
     <![endif]-->
-    <script defer type="text/javascript" src="{% static 'misc/js/jquery.min.js' %}"></script>
-    <script defer type="text/javascript" src="{% static 'misc/js/main.js' %}"></script>
-    {% block extrahead %}{% endblock extrahead %}
+    {% compress js %}
+        <script type="text/javascript" src="{% static 'misc/js/jquery-1.11.3.js' %}" defer></script>
+        <script type="text/javascript" src="{% static 'misc/js/main.js' %}" defer></script>
+        {% block extra-js %}{% endblock extra-js %}
+    {% endcompress %}
 </head>
 <body>
 <header>

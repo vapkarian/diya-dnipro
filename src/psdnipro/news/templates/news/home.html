@@ -1,8 +1,8 @@
 {% extends "misc/base.html" %}{% load static from staticfiles %}
 {% block title %}Головна | Правий Сектор{% endblock title %}
-{% block extrahead %}
-    <script defer src="{% static 'misc/js/assets.min.js' %}"></script>
-{% endblock %}
+{% block extra-js %}
+    <script src="{% static 'misc/js/assets.js' %}" defer></script>
+{% endblock extra-js %}
 {% block content %}
     {% if top_articles %}
         <div class="main_slider" data-rotation="target: .slides > div; pickerItems:.picker > div; interval: 5;">
