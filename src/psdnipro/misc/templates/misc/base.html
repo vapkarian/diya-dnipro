@@ -28,13 +28,13 @@
     <meta name="msapplication-TileImage" content="{% static 'misc/favicons/mstile-144x144.png' %}">
     <meta name="msapplication-config" content="{% static 'misc/favicons/browserconfig.xml' %}">
     <meta name="theme-color" content="#000000' %}">
-    <script src="{% static 'misc/js/jquery.min.js' %}"></script>
-    <link href="{% static 'misc/css/main.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'misc/css/reset.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'misc/css/main.css' %}" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
         <script src="{% static 'misc/js/html5shiv.min.js' %}"></script>
         <script src="{% static 'misc/js/respond.min.js' %}"></script>
-        <link href="{% static 'misc/css/ie-style.min.css' %}" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="{% static 'misc/css/ie-style.min.css' %}" />
         <script type="text/javascript">
             document.createElement('header');
             document.createElement('nav');
@@ -43,6 +43,7 @@
             document.createElement('section');
         </script>
     <![endif]-->
+    <script defer src="{% static 'misc/js/jquery.min.js' %}"></script>
     <script type="text/javascript">
         $(function () {
             var nav_items_selector = 'header nav ul li.nav-item';
