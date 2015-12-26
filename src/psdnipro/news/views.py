@@ -1,29 +1,28 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
+from psdnipro.misc.search import get_query
 from psdnipro.news.models import Article, Category, TeamMember
 
 
 __all__ = [
-    'HomeView', 'CategoryView', 'ArticleView',
+    'HomeView', 'CategoryView', 'SearchView', 'ArticleView', 'TeamView', 'TeamMemberView',
 ]
 
 
 class HomeView(ListView):
     http_method_names = ['get']
     template_name = 'news/home.html'
-    context_object_name = 'articles'
 
     def get_queryset(self):
-        qs = Article.objects.filter(is_active=True).order_by('-created')[:6]
-        return qs
+        queryset = Article.objects.filter(is_active=True).order_by('-created')[:6]
+        return queryset
 
 
 class CategoryView(ListView):
     http_method_names = ['get']
-    template_name = 'news/category.html'
-    context_object_name = 'articles'
     paginate_by = 10
+    template_name = 'news/category.html'
     category = None
 
     def dispatch(self, request, *args, **kwargs):
@@ -36,9 +35,34 @@ class CategoryView(ListView):
         return context
 
     def get_queryset(self):
-        queryset = Article.objects \
-            .filter(category=self.category, is_active=True) \
-            .order_by('-created')
+        queryset = Article.objects.filter(category=self.category, is_active=True).order_by('-created')
+        return queryset
+
+
+class SearchView(ListView):
+    http_method_names = ['get']
+    paginate_by = 10
+    template_name = 'news/search.html'
+    search_query = None
+
+    def dispatch(self, request, *args, **kwargs):
+        self.search_query = self.request.GET.get('search', '')
+        print(self.request.GET.urlencode())
+        return super(SearchView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchView, self).get_context_data(**kwargs)
+        context['search_query'] = self.search_query
+        return context
+
+    def get_queryset(self):
+        search_query = self.search_query
+        entry_query = get_query(search_query, ['title', 'text'])
+        queryset = Article.objects.filter(is_active=True).order_by('-created')
+        if entry_query is None:
+            queryset = queryset.none()
+        else:
+            queryset = queryset.filter(entry_query).distinct()
         return queryset
 
 
@@ -62,9 +86,9 @@ class ArticleView(DetailView):
 
 
 class TeamView(ListView):
+    context_object_name = 'team_members'
     http_method_names = ['get']
     template_name = 'news/team.html'
-    context_object_name = 'team_members'
     category = None
 
     def dispatch(self, request, *args, **kwargs):

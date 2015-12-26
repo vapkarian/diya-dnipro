@@ -1,8 +1,8 @@
-{% extends "misc/base.html" %}{% load static from staticfiles %}
+{% extends "misc/base.html" %}
 {% block title %}{{ category.title }} - Новини | Правий Сектор{% endblock title %}
 {% block content %}
     <h1>{{ category.title }}</h1>
-    {% include 'news/parts/news-list.html' with articles=articles only %}
+    {% include 'news/parts/news-list.html' with article_list=article_list only %}
     {% url 'news:category' url=category.url as target_url %}
     {% include 'misc/parts/pagination.html' with target_url=target_url page_obj=page_obj only %}
 {% endblock content %}

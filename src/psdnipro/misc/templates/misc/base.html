@@ -43,20 +43,8 @@
             document.createElement('section');
         </script>
     <![endif]-->
-    <script defer src="{% static 'misc/js/jquery.min.js' %}"></script>
-    <script type="text/javascript">
-        $(function () {
-            var nav_items_selector = 'header nav ul li.nav-item';
-            setInterval(function () {
-                $(nav_items_selector + ':not(:hover)').removeClass('hovered');
-            }, 1000);
-            $(nav_items_selector).hover(function () {
-                var $this = $(this);
-                $(nav_items_selector).removeClass('hovered');
-                $this.addClass('hovered');
-            });
-        });
-    </script>
+    <script defer type="text/javascript" src="{% static 'misc/js/jquery.min.js' %}"></script>
+    <script defer type="text/javascript" src="{% static 'misc/js/main.js' %}"></script>
     {% block extrahead %}{% endblock extrahead %}
 </head>
 <body>
@@ -89,6 +77,10 @@
                     <a class="cart" href="#"></a>
                 {% endif %}
             </div>
+            <form class="search" method="get" action="{% url 'news:search' %}">
+                <input type="text" placeholder="" name="search">
+                <input type="submit" value="Пошук">
+            </form>
         </div>
     </div>
     <div class="row below">

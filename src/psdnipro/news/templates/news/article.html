@@ -1,4 +1,4 @@
-{% extends "misc/base.html" %}{% load static from staticfiles %}
+{% extends "misc/base.html" %}
 {% block title %}{{ object.title }} | Правий Сектор{% endblock title %}
 {% block content %}
     <article>
@@ -19,5 +19,5 @@
             </div>
         </div>
     </article>
-    {% include 'news/parts/news-list.html' with articles=same_articles extra_classes='dark' only %}
+    {% include 'news/parts/news-list.html' with article_list=same_articles extra_classes='dark' only %}
 {% endblock content %}

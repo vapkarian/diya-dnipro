@@ -1,7 +1,7 @@
 {% extends "misc/base.html" %}{% load static from staticfiles %}
 {% block title %}Головна | Правий Сектор{% endblock title %}
 {% block extrahead %}
-    <script async src="{% static 'misc/js/assets.min.js' %}"></script>
+    <script defer src="{% static 'misc/js/assets.min.js' %}"></script>
 {% endblock %}
 {% block content %}
     {% if top_articles %}
@@ -24,5 +24,5 @@
             </div>
         </div>
     {% endif %}
-    {% include 'news/parts/news-list.html' with articles=articles extra_classes='dark' only %}
+    {% include 'news/parts/news-list.html' with article_list=article_list extra_classes='dark' only %}
 {% endblock content %}
