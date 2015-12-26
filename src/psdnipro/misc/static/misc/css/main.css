@@ -690,8 +690,6 @@ footer .legal {
     padding: 37px 25px 10px 200px;
     overflow: hidden;
     background: transparent url('../img/border.png') right -16px no-repeat;
-    /*filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/static/misc/img/border.png', sizingMethod='scale');*/
-    /*-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/static/misk/img/border.png', sizingMethod='scale')";*/
     background-size: 568px 169px;
     margin-left: 8px;
 }
