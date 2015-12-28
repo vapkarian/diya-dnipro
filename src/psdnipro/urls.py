@@ -17,6 +17,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include, url, static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.views.generic import TemplateView
 
 from psdnipro.sitemaps import SITEMAPS
@@ -29,7 +30,7 @@ urlpatterns = [
     url(r'^ps-admin/ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='misc/robots.txt', content_type='text/plain'),
         name='robots'),
-    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': SITEMAPS}, name='sitemap'),
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': SITEMAPS}, name='sitemap'),
     url(r'^', include('psdnipro.news.urls', namespace='news')),
 ]
 

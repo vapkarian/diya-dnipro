@@ -1,38 +1,46 @@
+import random
+
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
 from psdnipro.misc.search import get_query
-from psdnipro.news.models import Article, Category, TeamMember
+from psdnipro.news.models import *
 
 
 __all__ = [
-    'HomeView', 'CategoryView', 'SearchView', 'ArticleView', 'TeamView', 'TeamMemberView',
+    'HomeView', 'CategoryView', 'SearchView', 'ArticleView', 'TeamView', 'TeamMemberView', 'DocumentsView',
 ]
 
 
+class SectionView(ListView):
+    category = None
+
+    def dispatch(self, request, *args, **kwargs):
+        self.category = get_object_or_404(Category, is_active=True, url=self.kwargs['url'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.category
+        return context
+
+
 class HomeView(ListView):
+    context_object_name = 'article_list'
     http_method_names = ['get']
     template_name = 'news/home.html'
 
     def get_queryset(self):
-        queryset = Article.objects.filter(is_active=True).order_by('-created')[:6]
+        queryset = Article.objects.filter(is_active=True).exclude(is_top=True).order_by('-created')[:15]
+        queryset = list(queryset)
+        queryset = random.sample(queryset, min(6, len(queryset)))
         return queryset
 
 
-class CategoryView(ListView):
+class CategoryView(SectionView):
     http_method_names = ['get']
     paginate_by = 10
     template_name = 'news/category.html'
-    category = None
-
-    def dispatch(self, request, *args, **kwargs):
-        self.category = get_object_or_404(Category, url=self.kwargs['url'])
-        return super(CategoryView, self).dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(CategoryView, self).get_context_data(**kwargs)
-        context['category'] = self.category
-        return context
 
     def get_queryset(self):
         queryset = Article.objects.filter(category=self.category, is_active=True).order_by('-created')
@@ -47,10 +55,10 @@ class SearchView(ListView):
 
     def dispatch(self, request, *args, **kwargs):
         self.search_query = self.request.GET.get('search', '')
-        return super(SearchView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(SearchView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['search_query'] = self.search_query
         return context
 
@@ -71,7 +79,7 @@ class ArticleView(DetailView):
     template_name = 'news/article.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ArticleView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         same = Article.objects \
             .filter(category=self.object.category, is_active=True) \
             .exclude(pk=self.object.pk) \
@@ -84,23 +92,12 @@ class ArticleView(DetailView):
         return queryset
 
 
-class TeamView(ListView):
-    context_object_name = 'team_members'
+class TeamView(SectionView):
     http_method_names = ['get']
     template_name = 'news/team.html'
-    category = None
-
-    def dispatch(self, request, *args, **kwargs):
-        self.category = get_object_or_404(Category, url=self.kwargs['url'])
-        return super(TeamView, self).dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(TeamView, self).get_context_data(**kwargs)
-        context['category'] = self.category
-        return context
 
     def get_queryset(self):
-        queryset = TeamMember.objects.filter(category=self.category).order_by('id')
+        queryset = TeamMember.objects.filter(category=self.category, is_active=True).order_by('id')
         return queryset
 
 
@@ -108,3 +105,16 @@ class TeamMemberView(DetailView):
     http_method_names = ['get']
     model = TeamMember
     template_name = 'news/member.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(is_active=True)
+
+
+class DocumentsView(SectionView):
+    http_method_names = ['get']
+    template_name = 'news/documents.html'
+
+    def get_queryset(self):
+        queryset = Document.objects.filter(category=self.category, is_active=True).order_by('id')
+        return queryset

@@ -8,7 +8,7 @@ def navigation_links(request):
     :param django.http.HttpRequest request: metadata about request
     :rtype: dict
     """
-    return {'navigation_links': Category.objects.order_by('id')}
+    return {'navigation_links': Category.objects.filter(is_active=True).order_by('id')}
 
 
 def last_articles(request):
@@ -18,7 +18,7 @@ def last_articles(request):
     :param django.http.HttpRequest request: metadata about request
     :rtype: dict
     """
-    return {'last_articles': Article.objects.filter(is_active=True).order_by('-created')[:5]}
+    return {'last_articles': Article.objects.filter(is_active=True).exclude(is_top=False).order_by('-created')[:5]}
 
 
 def top_articles(request):

@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from psdnipro.news.views import HomeView, CategoryView, SearchView, ArticleView, TeamView, TeamMemberView
+from psdnipro.news.views import *
 
 
 __all__ = [
@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^article/(?P<pk>\d+)/$', ArticleView.as_view(), name='article'),
     url(r'^team/(?P<url>.+)/$', TeamView.as_view(), name='team'),
     url(r'^member/(?P<pk>\d+)/$', TeamMemberView.as_view(), name='member'),
+    url(r'^documents/(?P<url>.+)/$', DocumentsView.as_view(), name='documents'),
 ]

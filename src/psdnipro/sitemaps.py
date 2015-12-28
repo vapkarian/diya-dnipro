@@ -6,7 +6,7 @@ __all__ = [
 ]
 
 SITEMAPS = {
-    'categories': CategorySitemap(),
+    'categories': CategorySectionSitemap(),
     'articles': ArticleSitemap(),
     'team_members': TeamMemberSitemap(),
 }

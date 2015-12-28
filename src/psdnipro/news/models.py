@@ -9,13 +9,14 @@ from django.utils.safestring import mark_safe
 
 
 __all__ = [
-    'Category', 'Article', 'TeamMember',
+    'Category', 'Article', 'TeamMember', 'Document',
 ]
 
 
 class Category(models.Model):
     title = models.CharField(max_length=64, verbose_name='Назва')
     url = models.CharField(max_length=128, verbose_name='Посилання')
+    is_active = models.BooleanField(default=True, verbose_name='Відображати?')
 
     class Meta:
         verbose_name = 'запис категорії'
@@ -64,11 +65,12 @@ class Article(models.Model):
 
 
 class TeamMember(models.Model):
+    category = models.ForeignKey(Category, verbose_name='Категорія')
     name = models.CharField(max_length=128, verbose_name="Ім'я")
     position = models.CharField(max_length=128, verbose_name='Посада')
     photo = models.ImageField(upload_to='photos/', verbose_name='Світлина')
     bio = models.TextField(blank=True, verbose_name='Анкета')
-    category = models.ForeignKey(Category, verbose_name='Категорія')
+    is_active = models.BooleanField(default=True, verbose_name='Відображати?')
 
     class Meta:
         verbose_name = 'запис персони'
@@ -79,3 +81,18 @@ class TeamMember(models.Model):
 
     def get_absolute_url(self):
         return reverse('news:member', args=(self.id,))
+
+
+class Document(models.Model):
+    category = models.ForeignKey(Category, verbose_name='Категорія')
+    title = models.TextField(verbose_name='Назва')
+    description = models.TextField(verbose_name='Опис', blank=True)
+    url = models.URLField(verbose_name='Посилання')
+    is_active = models.BooleanField(default=True, verbose_name='Відображати?')
+
+    class Meta:
+        verbose_name = 'документ'
+        verbose_name_plural = 'Документи'
+
+    def __str__(self):
+        return self.title

@@ -1,18 +1,27 @@
 from django.contrib.sitemaps import Sitemap
+from django.core.urlresolvers import reverse
 
-from psdnipro.news.models import Article, Category, TeamMember
+from psdnipro.news.models import *
 
 
 __all__ = [
-    'CategorySitemap', 'ArticleSitemap', 'TeamMemberSitemap',
+    'CategorySectionSitemap', 'ArticleSitemap', 'TeamMemberSitemap',
 ]
 
 
-class CategorySitemap(Sitemap):
+class CategorySectionSitemap(Sitemap):
     priority = 0.4
 
     def items(self):
-        return Category.objects.all()
+        items = []
+        views = ('category', 'team', 'documents')
+        for category in Category.objects.all():
+            for view in views:
+                items.append({'name': view, 'url': category.url})
+        return items
+
+    def location(self, obj):
+        return reverse('news:{name}'.format(name=obj['name']), kwargs={'url': obj['url']})
 
 
 class ArticleSitemap(Sitemap):
@@ -30,4 +39,4 @@ class TeamMemberSitemap(Sitemap):
     priority = 0.6
 
     def items(self):
-        return TeamMember.objects.all()
+        return TeamMember.objects.filter(is_active=True)

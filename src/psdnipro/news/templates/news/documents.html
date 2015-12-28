@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ category.title }} - Докуенти | {{ block.super }}{% endblock title %}
+{% block content %}
+    <h1>{{ category.title }}</h1>
+    <div class="documents-list">
+        {% for document in document_list %}
+            <div class="document">
+                <a href="{{ document.url }}">
+                    <div class="document-title">{{ document.title }}</div>
+                    <div class="document-description">{{ document.description }}</div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

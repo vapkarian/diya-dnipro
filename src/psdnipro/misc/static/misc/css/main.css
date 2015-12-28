@@ -151,7 +151,7 @@ header .search input[type=text] {
     padding-left: 40px;
     padding-right: 80px;
     font-family: "Times New Roman", serif;
-    font-size: 14px;
+    font-size: 12pt;
 }
 
 header .search input[type=submit] {
@@ -166,7 +166,7 @@ header .search input[type=submit] {
     height: 40px;
     width: 80px;
     font-family: "NarbutClassic", Arial, serif;
-    font-size: 16px;
+    font-size: 14pt;
     color: white;
 }
 
@@ -629,28 +629,42 @@ footer .legal {
     margin-bottom: 10px;
 }
 
-.content .members-list {
+.content .members-list,
+.content .documents-list {
     overflow: hidden;
     float: left;
     width: 748px;
     margin-top: 20px;
 }
 
-.content .members-list .member {
+.content .members-list .member,
+.content .documents-list .document {
     float: left;
     width: 200px;
-    height: 245px;
     margin: 20px;
     box-sizing: border-box;
     overflow: hidden
 }
 
-.content .members-list .member .member-name {
+.content .members-list .member {
+    height: 245px;
+}
+
+.content .members-list .member .member-name,
+.content .documents-list .document .document-title {
     width: 100%;
     text-align: center;
     padding-top: 10px;
     color: white;
     text-decoration: underline;
+}
+
+.content .documents-list .document .document-description {
+    width: 100%;
+    padding-top: 10px;
+    color: white;
+    font-family: "Times New Roman", serif;
+    font-size: 11pt;
 }
 
 .content article .member-photo {
