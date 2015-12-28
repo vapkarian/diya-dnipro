@@ -235,7 +235,7 @@ header nav ul ul {
     filter: alpha(opacity=80);
     border: grey outset 7px;
     border-radius: 100px / 25px;
-    min-width: 150px;
+    width: 100%;
 }
 
 header nav ul ul li {
