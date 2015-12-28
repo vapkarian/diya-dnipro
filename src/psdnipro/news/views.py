@@ -31,7 +31,7 @@ class HomeView(ListView):
     template_name = 'news/home.html'
 
     def get_queryset(self):
-        queryset = Article.objects.filter(is_active=True).exclude(is_top=True).order_by('-created')[:15]
+        queryset = Article.objects.filter(is_active=True, is_top=False).order_by('-created')[:15]
         queryset = list(queryset)
         queryset = random.sample(queryset, min(6, len(queryset)))
         return queryset
