@@ -272,7 +272,7 @@ header .nav-item {
     margin-top: 3px;
     background-color: #9c1c1b;
     border-radius: 25px;
-    padding: 17px 50px 13px 10px;
+    padding: 17px 55px 13px 10px;
     cursor: default;
 }
 
@@ -281,7 +281,7 @@ header a.nav-item {
 }
 
 header .nav-item.hovered {
-    background: #1b1b1b url('../img/arrow.png') no-repeat 90% center;
+    background: #1b1b1b url('../img/arrow.png') no-repeat 92% center;
 }
 
 header .nav-item.home {
