@@ -1,23 +1,23 @@
 {% extends "base.html" %}
-{% block title %}{{ object.title }} | {{ block.super }}{% endblock title %}
+{% block title %}{{ article.title }} | {{ block.super }}{% endblock title %}
 {% block content %}
     <article>
         <div class="row">
-            <a href="{{ object.category.get_absolute_url }}" class="article-category">{{ object.category.title }}</a>
-            <div class="article-time">{{ object.created|date:"H:i" }}</div>
-            <div class="article-date">{{ object.created|date:"d.m.Y" }}</div>
+            <a href="{{ article.category.get_absolute_url }}" class="article-category">{{ article.category.title }}</a>
+            <div class="article-time">{{ article.created|date:"H:i" }}</div>
+            <div class="article-date">{{ article.created|date:"d.m.Y" }}</div>
         </div>
         <div class="row">
-            <a class="article-image" href="{{ object.image_url }}" target="_blank">
-                <img alt="Зображення" src="{{ object.image_url }}"/>
+            <a class="article-image" href="{{ article.image_url }}" target="_blank">
+                <img alt="Зображення" src="{{ article.image_url }}"/>
             </a>
-            <div class="article-title">{{ object.title }}</div>
+            <div class="article-title">{{ article.title }}</div>
             <div class="article-text">
                 {% autoescape on %}
-                    {{ object.text | safe }}
+                    {{ article.text | safe }}
                 {% endautoescape %}
             </div>
         </div>
     </article>
-    {% include 'news/parts/news-list.html' with article_list=same_articles extra_classes='dark' only %}
+    {% include 'news/parts/news-list.html' with articles=same_articles extra_classes='dark' only %}
 {% endblock content %}

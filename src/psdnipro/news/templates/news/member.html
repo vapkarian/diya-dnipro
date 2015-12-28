@@ -1,16 +1,16 @@
 {% extends "base.html" %}
-{% block title %}{{ object.name }} | {{ block.super }}{% endblock title %}
+{% block title %}{{ member.name }} | {{ block.super }}{% endblock title %}
 {% block content %}
     <article>
         <div class="row">
-            <a class="member-photo" href="{{ object.photo.url }}" target="_blank">
-                <img alt="Зображення" src="{{ object.photo.url }}"/>
+            <a class="member-photo" href="{{ member.photo.url }}" target="_blank">
+                <img alt="Зображення" src="{{ member.photo.url }}"/>
             </a>
-            <div class="member-name">{{ object.name }}</div>
-            <div class="member-position">{{ object.position }}</div>
+            <div class="member-name">{{ member.name }}</div>
+            <div class="member-position">{{ member.position }}</div>
             <div class="member-bio">
                 {% autoescape on %}
-                    {{ object.bio | linebreaksbr }}
+                    {{ member.bio | linebreaksbr }}
                 {% endautoescape %}
             </div>
         </div>

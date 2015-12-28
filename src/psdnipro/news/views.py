@@ -26,7 +26,7 @@ class SectionView(ListView):
 
 
 class HomeView(ListView):
-    context_object_name = 'article_list'
+    context_object_name = 'articles'
     http_method_names = ['get']
     template_name = 'news/home.html'
 
@@ -38,6 +38,7 @@ class HomeView(ListView):
 
 
 class CategoryView(SectionView):
+    context_object_name = 'articles'
     http_method_names = ['get']
     paginate_by = 10
     template_name = 'news/category.html'
@@ -48,6 +49,7 @@ class CategoryView(SectionView):
 
 
 class SearchView(ListView):
+    context_object_name = 'articles'
     http_method_names = ['get']
     paginate_by = 10
     template_name = 'news/search.html'
@@ -74,6 +76,7 @@ class SearchView(ListView):
 
 
 class ArticleView(DetailView):
+    context_object_name = 'article'
     http_method_names = ['get']
     model = Article
     template_name = 'news/article.html'
@@ -93,6 +96,7 @@ class ArticleView(DetailView):
 
 
 class TeamView(SectionView):
+    context_object_name = 'members'
     http_method_names = ['get']
     template_name = 'news/team.html'
 
@@ -102,6 +106,7 @@ class TeamView(SectionView):
 
 
 class TeamMemberView(DetailView):
+    context_object_name = 'member'
     http_method_names = ['get']
     model = TeamMember
     template_name = 'news/member.html'
@@ -112,6 +117,7 @@ class TeamMemberView(DetailView):
 
 
 class DocumentsView(SectionView):
+    context_object_name = 'documents'
     http_method_names = ['get']
     template_name = 'news/documents.html'
 

@@ -3,7 +3,7 @@
 {% block content %}
     <h1>{{ category.title }}</h1>
     <div class="members-list">
-        {% for member in member_list %}
+        {% for member in members %}
             <div class="member">
                 <a href="{{ member.get_absolute_url }}">
                     <img alt="Зображення" src="{{ member.photo.url }}" width="200" height="200"/>
