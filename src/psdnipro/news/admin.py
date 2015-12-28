@@ -89,7 +89,7 @@ class DocumentAdmin(admin.ModelAdmin):
         :param psdnipro.news.models.Document obj: instance
         :rtype bool
         """
-        return '<a href="{url}">{title}</a>'.format(url=obj.url, title=obj.title)
+        return '<a href="{url}" target="_blank">{title}</a>'.format(url=obj.url, title=obj.title)
 
     clickable_url.allow_tags = True
     clickable_url.description = 'Посилання'
