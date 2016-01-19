@@ -120,15 +120,15 @@ footer .title {
     color: white;
     float: left;
     margin: 25px 0;
-    width: 220px;
+    width: 230px;
     text-transform: uppercase;
 }
 
-header .title .city {
+header .title .sub-title {
     color: #9c1c1b;
 }
 
-footer .title .city {
+footer .title .sub-title {
     color: #00001b;
 }
 
@@ -289,7 +289,7 @@ header .nav-item.home {
 }
 
 footer .logo-icons {
-    width: 300px;
+    width: 310px;
     float: left;
 }
 

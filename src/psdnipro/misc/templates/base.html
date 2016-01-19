@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1100, initial-scale=1">
     <title>
-        {% block title %}Правий Сектор{% endblock title %}
+        {% block title %}Національний рух Дмитра Яроша{% endblock title %}
     </title>
     <link rel="apple-touch-icon" sizes="57x57" href="{% static 'misc/favicons/apple-touch-icon-57x57.png' %}">
     <link rel="apple-touch-icon" sizes="60x60" href="{% static 'misc/favicons/apple-touch-icon-60x60.png' %}">
@@ -71,7 +71,7 @@
             <a href="{% url 'news:home' %}">
                 <div class="logo" title="Слава Україні!"></div>
                 <div class="title">
-                    Правий Сектор <span class="city">Дніпро</span>
+                    Національний рух <span class="sub-title">Дмитра Яроша</span>
                 </div>
             </a>
             <div class="icons">
@@ -147,7 +147,7 @@
                 <a href="{% url 'news:home' %}">
                     <div class="logo" title="Героям слава!"></div>
                     <div class="title">
-                        Правий Сектор <span class="city">Дніпро</span>
+                        Національний рух <span class="sub-title">Дмитра Яроша</span>
                     </div>
                 </a>
                 <div class="icons">
@@ -158,8 +158,7 @@
             </div>
             <div class="copyright-legal">
                 <div class="copyright">
-                    {# TODO: change 2016 to {% now "Y" %} #}
-                    © 2015 - 2016 Правий сектор
+                    © 2015 - {% now "Y" %} Національний рух Дмитра Яроша
                 </div>
                 <div class="legal">
                     Передрук та інше використання матеріалів, що розмщені на сайті, дозволяється за умови посилання
