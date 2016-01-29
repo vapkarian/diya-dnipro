@@ -252,7 +252,7 @@ header nav ul li.hovered > ul {
 
 header a {
     font-weight: bold;
-    font-size: 16pt;
+    font-size: 15pt;
     color: white;
 }
 
@@ -265,7 +265,7 @@ header .staff a {
 
 header .nav-item {
     font-weight: bold;
-    font-size: 16pt;
+    font-size: 15pt;
     color: white;
     position: relative;
     display: inline-block;
@@ -637,13 +637,33 @@ footer .legal {
     margin-top: 20px;
 }
 
+.content .contacts-list {
+    overflow: hidden;
+    float: left;
+    width: 260px;
+    margin-top: 15px;
+}
+
 .content .members-list .member,
-.content .documents-list .document {
+.content .documents-list .document,
+.content .contacts-list .contact {
     float: left;
     width: 200px;
     margin: 20px;
     box-sizing: border-box;
     overflow: hidden
+}
+
+.content .contacts-list .contact {
+    float: left;
+    font-family: "Times New Roman", serif;
+    font-size: 14pt;
+}
+
+.content #contact-map {
+    float: right;
+    width: 450px;
+    height: 300px;
 }
 
 .content .members-list .member {

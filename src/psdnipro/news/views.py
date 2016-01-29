@@ -9,6 +9,7 @@ from psdnipro.news.models import *
 
 __all__ = [
     'HomeView', 'CategoryView', 'SearchView', 'ArticleView', 'TeamView', 'TeamMemberView', 'DocumentsView',
+    'ContactsView',
 ]
 
 
@@ -123,4 +124,23 @@ class DocumentsView(SectionView):
 
     def get_queryset(self):
         queryset = Document.objects.filter(category=self.category, is_active=True).order_by('id')
+        return queryset
+
+
+class ContactsView(ListView):
+    context_object_name = 'contacts'
+    http_method_names = ['get']
+    template_name = 'news/contacts.html'
+
+    def get_queryset(self):
+        queryset = [
+            {'title': 'Координатор', 'phone': '067 641 89 80'},
+            {'title': 'Виконком', 'phone': '067 483 54 55'},
+            {'title': 'Юридичний департамент', 'phone': '095 060 26 65'},
+            {'title': 'Виборчий штаб', 'phone': '067 984 68 14'},
+            {'title': 'Речник', 'phone': '067 57 57 444'},
+            {'title': 'ДУК-інфо', 'phone': '093 517 47 96'},
+            {'title': 'Відділ волонтерської служби', 'phone': '099 780 04 07'},
+            {'title': 'З питань співпраці', 'phone': '095 810 28 93'},
+        ]
         return queryset

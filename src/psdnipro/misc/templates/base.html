@@ -104,6 +104,9 @@
                         </ul>
                     </li>
                 {% endfor %}
+                <li class="nav-item home">
+                    <a href="{% url 'news:contacts' %}">Головна</a>
+                </li>
             </ul>
         </nav>
     </div>
@@ -131,11 +134,11 @@
                     <hr class="row short-article-delimiter">
                 {% endfor %}
             </div>
-            <div class="notice">
-                {% block notice %}
-                    <img src="{% static 'misc/img/blokada.jpg' %}" width="353px" alt="Допомога ПС" title="Допомога ПС">
-                {% endblock notice %}
-            </div>
+            {# <div class="notice"> #}
+            {#     {% block notice %} #}
+            {#         <img src="{% static 'misc/img/blokada.jpg' %}" width="353px" alt="Допомога ПС" title="Допомога ПС"> #}
+            {#     {% endblock notice %} #}
+            {# </div> #}
         </div>
     </div>
 </div>
