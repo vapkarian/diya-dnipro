@@ -14,5 +14,5 @@ urlpatterns = [
     url(r'^team/(?P<url>.+)/$', TeamView.as_view(), name='team'),
     url(r'^member/(?P<pk>\d+)/$', TeamMemberView.as_view(), name='member'),
     url(r'^documents/(?P<url>.+)/$', DocumentsView.as_view(), name='documents'),
-    url(r'^contacts/$', Contacts.as_view(), name='contacts'),
+    url(r'^contacts/$', ContactsView.as_view(), name='contacts'),
 ]
