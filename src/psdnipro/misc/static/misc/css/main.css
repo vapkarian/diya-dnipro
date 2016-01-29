@@ -640,13 +640,12 @@ footer .legal {
 .content .contacts-list {
     overflow: hidden;
     float: left;
-    width: 260px;
+    width: 310px;
     margin-top: 15px;
 }
 
 .content .members-list .member,
-.content .documents-list .document,
-.content .contacts-list .contact {
+.content .documents-list .document {
     float: left;
     width: 200px;
     margin: 20px;
@@ -656,13 +655,16 @@ footer .legal {
 
 .content .contacts-list .contact {
     float: left;
+    width: 310px;
+    margin: 10px 0;
     font-family: "Times New Roman", serif;
-    font-size: 14pt;
+    font-size: 12pt;
+    color: white;
 }
 
 .content #contact-map {
     float: right;
-    width: 450px;
+    width: 400px;
     height: 300px;
 }
 
