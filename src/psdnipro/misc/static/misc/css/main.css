@@ -252,7 +252,7 @@ header nav ul li.hovered > ul {
 
 header a {
     font-weight: bold;
-    font-size: 15pt;
+    font-size: 14pt;
     color: white;
 }
 
@@ -265,7 +265,7 @@ header .staff a {
 
 header .nav-item {
     font-weight: bold;
-    font-size: 15pt;
+    font-size: 14pt;
     color: white;
     position: relative;
     display: inline-block;
