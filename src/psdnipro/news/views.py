@@ -34,7 +34,8 @@ class HomeView(ListView):
     def get_queryset(self):
         queryset = Article.objects.filter(is_active=True, is_top=False).order_by('-created')[:15]
         queryset = list(queryset)
-        queryset = random.sample(queryset, min(6, len(queryset)))
+        random.shuffle(queryset)
+        queryset = sorted(queryset[:6], key=lambda x: x.created, reverse=True)
         return queryset
 
 
