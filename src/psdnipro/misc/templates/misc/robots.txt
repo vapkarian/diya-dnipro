@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: {% url 'admin:index' %}
+Sitemap: {{ request.build_absolute_uri }}{% url 'sitemap' %}
