@@ -60,6 +60,7 @@ mkdir ${DIR}/logs
 mkdir ${DIR}/pids
 mkdir ${DIR}/static_content
 mkdir ${DIR}/static_content/media
+mkdir ${DIR}/static_content/static
 
 # Create virtual environment for Python packages
 virtualenv -p ${PYTHON_EXECUTABLE} --prompt="<env>" ${DIR}/env
