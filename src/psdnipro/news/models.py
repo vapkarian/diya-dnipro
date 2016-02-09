@@ -9,7 +9,7 @@ from django.utils.safestring import mark_safe
 
 
 __all__ = [
-    'Category', 'Article', 'TeamMember', 'Document',
+    'Category', 'Article', 'TeamMember', 'Document', 'Contact',
 ]
 
 
@@ -93,6 +93,19 @@ class Document(models.Model):
     class Meta:
         verbose_name = 'документ'
         verbose_name_plural = 'Документи'
+
+    def __str__(self):
+        return self.title
+
+
+class Contact(models.Model):
+    title = models.CharField(max_length=32)
+    phones = models.TextField()
+    is_active = models.BooleanField(default=True, verbose_name='Відображати?')
+
+    class Meta:
+        verbose_name = 'контакт'
+        verbose_name_plural = 'Контакти'
 
     def __str__(self):
         return self.title

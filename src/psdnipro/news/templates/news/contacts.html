@@ -1,11 +1,11 @@
-{% extends "base.html" %}{% load static from staticfiles %}
+{% extends "base.html" %}{% load static from staticfiles %}{% load format_phones %}
 {% block title %}Контакти | {{ block.super }}{% endblock title %}
 {% block content %}
     <h1>Контакти</h1>
     <div class="contacts-list">
         {% for contact in contacts %}
             <div class="contact">
-                <p>{{ contact.title }} - {{contact.phone }};</p>
+                <p>{{ contact.title }} - {{ contact.phones|format_phones }};</p>
             </div>
         {% endfor %}
     </div>

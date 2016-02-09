@@ -3,7 +3,7 @@ from psdnipro.news.models import *
 
 
 __all__ = [
-    'CategoryAdmin', 'ArticleAdmin', 'TeamMemberAdmin', 'DocumentAdmin',
+    'CategoryAdmin', 'ArticleAdmin', 'TeamMemberAdmin', 'DocumentAdmin', 'ContactAdmin',
 ]
 
 
@@ -93,3 +93,21 @@ class DocumentAdmin(admin.ModelAdmin):
 
     clickable_url.allow_tags = True
     clickable_url.description = 'Посилання'
+
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('title', 'phones', 'is_active')
+    list_filter = ('is_active',)
+    ordering = ('id',)
+    save_on_top = True
+
+    def has_delete_permission(self, request, obj=None):
+        """
+        Prevent deleting objects by admins.
+
+        :param django.http.HttpRequest request: metadata about request
+        :param psdnipro.news.models.Category obj: instance
+        :rtype bool
+        """
+        return False

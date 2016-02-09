@@ -661,6 +661,11 @@ footer .legal {
     color: white;
 }
 
+.content .contacts-list .contact a {
+    color: white;
+    font-weight: bold;
+}
+
 .content #contact-map {
     float: right;
     width: 400px;
