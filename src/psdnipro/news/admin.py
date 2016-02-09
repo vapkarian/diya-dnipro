@@ -47,9 +47,9 @@ class ArticleAdmin(admin.ModelAdmin):
 
 @admin.register(TeamMember)
 class TeamMemberAdmin(admin.ModelAdmin):
-    list_display = ('name', 'position', 'category', 'is_active')
-    list_filter = ('is_active', 'category')
-    list_select_related = ('category',)
+    filter_horizontal = ('categories',)
+    list_display = ('name', 'position', 'is_active')
+    list_filter = ('is_active', 'categories')
     ordering = ('id',)
     save_on_top = True
 

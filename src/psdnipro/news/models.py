@@ -32,7 +32,7 @@ class Category(models.Model):
 class Article(models.Model):
     DEFAULT_IMAGE = static('news/img/default-preview.png')
 
-    category = models.ForeignKey(Category, verbose_name='Категорія')
+    category = models.ForeignKey(Category, related_name='articles', verbose_name='Категорія')
     title = models.TextField(verbose_name='Назва')
     image = models.ImageField(upload_to='uploads/', null=True, blank=True, verbose_name='Основне зображення до статті',
                               help_text=mark_safe('Якщо не обрано, за замовчуванням використовується <a href="{}" '
@@ -65,7 +65,7 @@ class Article(models.Model):
 
 
 class TeamMember(models.Model):
-    category = models.ForeignKey(Category, verbose_name='Категорія')
+    categories = models.ManyToManyField(Category, related_name='members', verbose_name='Категорії')
     name = models.CharField(max_length=128, verbose_name="Ім'я")
     position = models.CharField(max_length=128, verbose_name='Посада')
     photo = models.ImageField(upload_to='photos/', verbose_name='Світлина')
@@ -84,7 +84,7 @@ class TeamMember(models.Model):
 
 
 class Document(models.Model):
-    category = models.ForeignKey(Category, verbose_name='Категорія')
+    category = models.ForeignKey(Category, related_name='documents', verbose_name='Категорія')
     title = models.TextField(verbose_name='Назва')
     description = models.TextField(verbose_name='Опис', blank=True)
     url = models.URLField(verbose_name='Посилання')

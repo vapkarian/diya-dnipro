@@ -103,7 +103,7 @@ class TeamView(SectionView):
     template_name = 'news/team.html'
 
     def get_queryset(self):
-        queryset = TeamMember.objects.filter(category=self.category, is_active=True).order_by('id')
+        queryset = TeamMember.objects.filter(categories=self.category, is_active=True).order_by('id')
         return queryset
 
 
