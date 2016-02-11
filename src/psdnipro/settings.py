@@ -88,6 +88,7 @@ TEMPLATES = [
                 'psdnipro.news.context_processors.navigation_links',
                 'psdnipro.news.context_processors.last_articles',
                 'psdnipro.news.context_processors.top_articles',
+                'psdnipro.news.context_processors.google_map_url',
             ],
         },
     },

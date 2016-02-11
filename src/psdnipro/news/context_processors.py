@@ -1,4 +1,11 @@
+from psdnipro.misc.models import SiteSetting
+
 from psdnipro.news.models import Category, Article
+
+
+__all__ = [
+    'navigation_links', 'last_articles', 'top_articles', 'google_map',
+]
 
 
 def navigation_links(request):
@@ -29,3 +36,15 @@ def top_articles(request):
     :rtype: dict
     """
     return {'top_articles': Article.objects.filter(is_active=True, is_top=True).order_by('-created')[:4]}
+
+
+def google_map_url(request):
+    """
+    Cached google map for contacts page.
+
+    :param django.http.HttpRequest request: metadata about request
+    :rtype: dict
+    """
+    return {
+        'google_map_url': SiteSetting.get_value('google_map_url', '#'),
+    }

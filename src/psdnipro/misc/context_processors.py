@@ -3,7 +3,7 @@ from psdnipro.misc.models import SiteSetting
 
 def social_icons(request):
     """
-    Cached social links.
+    Cached social links for header and footer.
 
     :param django.http.HttpRequest request: metadata about request
     :rtype: dict
