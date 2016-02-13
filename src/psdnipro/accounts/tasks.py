@@ -1,12 +1,15 @@
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
+import requests
+from ua_parser import user_agent_parser
 
 from psdnipro import celery_app
+from psdnipro.accounts.models import TrackingRecord
 
 
 __all__ = [
-    'send_mail',
+    'send_mail', 'parse_tracking_info',
 ]
 
 
@@ -45,3 +48,36 @@ def send_mail(emails, subject, text_template, html_template=None, extra_context=
         for filename, content, mimetype in attachments:
             msg.attach(filename, content, mimetype)
     msg.send()
+
+
+@celery_app.task
+def parse_tracking_info(ua_string, ip, referrer):
+    fields = {'ua_string': ua_string, 'ip': ip, 'referrer': referrer}
+
+    if ua_string:
+        ua_info = user_agent_parser.Parse(ua_string)
+        fields['browser_family'] = ua_info['user_agent']['family']
+        fields['browser_version'] = ua_info['user_agent']['major']
+        fields['os_family'] = ua_info['os']['family']
+        fields['os_version'] = ua_info['os']['major']
+        fields['device_brand'] = ua_info['device']['brand']
+        fields['device_family'] = ua_info['device']['family']
+        fields['device_model'] = ua_info['device']['model']
+
+    if ip:
+        same_ip = TrackingRecord.objects.filter(ip=ip).last()
+        if same_ip is not None:
+            fields['coordinates'] = same_ip.coordinates
+            fields['city'] = same_ip.city
+            fields['region'] = same_ip.region
+            fields['country'] = same_ip.country
+        else:
+            response = requests.get('http://ipinfo.io/{}'.format(ip))
+            ip_info = response.json()
+            fields['coordinates'] = ip_info.get('loc')
+            fields['city'] = ip_info.get('city')
+            fields['region'] = ip_info.get('region')
+            fields['country'] = ip_info.get('country')
+
+    fields = {key: value or '' for key, value in fields.items()}
+    TrackingRecord.objects.create(**fields)

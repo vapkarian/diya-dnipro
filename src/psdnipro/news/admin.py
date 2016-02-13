@@ -87,7 +87,7 @@ class DocumentAdmin(admin.ModelAdmin):
         Link to the document.
 
         :param psdnipro.news.models.Document obj: instance
-        :rtype bool
+        :rtype str
         """
         return '<a href="{url}" target="_blank">{title}</a>'.format(url=obj.url, title=obj.title)
 

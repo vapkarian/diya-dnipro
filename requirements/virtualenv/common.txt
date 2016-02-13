@@ -8,3 +8,4 @@ django_ckeditor==5.0.2
 slimit==0.8.1
 -e git+git://github.com/django-compressor/django-compressor.git#egg=django-compressor
 celery[redis]==3.1.20
+ua-parser==0.6.1

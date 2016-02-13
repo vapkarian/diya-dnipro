@@ -6,7 +6,7 @@ from django.db import models
 
 
 __all__ = [
-    'User', 'Feedback',
+    'User', 'Feedback', 'TrackingRecord',
 ]
 
 
@@ -101,3 +101,57 @@ class Feedback(models.Model):
 
     def __str__(self):
         return '{name} ({email})'.format(name=self.name, email=self.email)
+
+
+class TrackingRecord(models.Model):
+    ua_string = models.TextField(blank=True, verbose_name='User-Agent')
+    ip = models.TextField(blank=True, db_index=True, verbose_name='IP адреса')
+    referrer = models.TextField(blank=True, verbose_name='URL джерела запиту')
+    browser_family = models.TextField(blank=True, db_index=True, verbose_name='Сімейство браузера')
+    browser_version = models.TextField(blank=True, verbose_name='Версія браузера')
+    os_family = models.TextField(blank=True, db_index=True, verbose_name='Сімейство операційної системи')
+    os_version = models.TextField(blank=True, verbose_name='Версія операційної системи')
+    device_brand = models.TextField(blank=True, db_index=True, verbose_name='Марка пристрою')
+    device_family = models.TextField(blank=True, verbose_name='Сімейство пристрою')
+    device_model = models.TextField(blank=True, verbose_name='Модель пристрою')
+    coordinates = models.TextField(blank=True, verbose_name='Координати')
+    city = models.TextField(blank=True, db_index=True, verbose_name='Місто')
+    region = models.TextField(blank=True, verbose_name='Регіон')
+    country = models.TextField(blank=True, db_index=True, verbose_name='Країна')
+    created = models.DateTimeField(default=datetime.now, verbose_name='Дата розміщення')
+
+    class Meta:
+        verbose_name = 'запис відстеження'
+        verbose_name_plural = 'Записи відстеження'
+
+    def __str__(self):
+        return '123'.format()
+
+    @property
+    def map_url(self):
+        url = ''
+        if self.coordinates:
+            latitude, longitude = self.coordinates.split(',')
+            url = 'http://www.gps-coordinates.net/latitude-longitude/{latitude}/{longitude}'.format(**locals())
+        return url
+
+    @staticmethod
+    def _shorten_value(family, version):
+        value = ''
+        if family:
+            value = family
+            if version:
+                value = '{value} {version}'.format(value=value, version=version)
+        return value
+
+    @property
+    def browser(self):
+        return self._shorten_value(self.browser_family, self.browser_version)
+
+    @property
+    def os(self):
+        return self._shorten_value(self.os_family, self.os_version)
+
+    @property
+    def device(self):
+        return self._shorten_value(self.device_brand, self.device_family)

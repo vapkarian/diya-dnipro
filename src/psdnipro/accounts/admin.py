@@ -49,6 +49,28 @@ class FeedbackAdmin(admin.ModelAdmin):
     fields = ('email', 'message', 'created')
     list_display = ('email', 'preview', 'created')
     ordering = ('-created',)
+    readonly_fields = ('email', 'message', 'created')
+    save_on_top = True
+
+    def has_add_permission(self, request, obj=None):
+        """
+        Prevent adding objects by admins.
+
+        :param django.http.HttpRequest request: metadata about request
+        :param psdnipro.accounts.models.Feedback obj: instance
+        :rtype bool
+        """
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        """
+        Prevent deleting objects by admins.
+
+        :param django.http.HttpRequest request: metadata about request
+        :param psdnipro.accounts.models.Feedback obj: instance
+        :rtype bool
+        """
+        return False
 
     def preview(self, obj):
         """
@@ -60,3 +82,58 @@ class FeedbackAdmin(admin.ModelAdmin):
         if len(obj.message) > 120:
             return '{}...'.format(obj.message[:117])
         return obj.message
+
+
+@admin.register(TrackingRecord)
+class TrackingRecordAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Вихідна інформация', {'fields': ('ua_string', 'ip', 'referrer', 'created')}),
+        ('Браузер', {'fields': ('browser_family', 'browser_version')}),
+        ('Операційна система', {'fields': ('os_family', 'os_version')}),
+        ('Пристрій', {'fields': ('device_brand', 'device_family', 'device_model')}),
+        ('Місцезнаходження', {'fields': ('coordinates', 'city', 'region', 'country')}),
+    )
+    readonly_fields = (
+        'ua_string', 'ip', 'referrer', 'browser_family', 'browser_version', 'os_family', 'os_version', 'device_brand',
+        'device_family', 'device_model', 'coordinates', 'city', 'region', 'country', 'created', 'clickable_map_url',
+    )
+    list_display = ('ip', 'referrer', 'browser', 'os', 'device', 'clickable_map_url', 'created')
+    list_filter = ('browser_family', 'os_family', 'device_brand', 'city', 'country')
+    ordering = ('-created',)
+    save_on_top = True
+
+    def has_add_permission(self, request, obj=None):
+        """
+        Prevent adding objects by admins.
+
+        :param django.http.HttpRequest request: metadata about request
+        :param psdnipro.accounts.models.TrackingRecord obj: instance
+        :rtype bool
+        """
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        """
+        Prevent deleting objects by admins.
+
+        :param django.http.HttpRequest request: metadata about request
+        :param psdnipro.accounts.models.TrackingRecord obj: instance
+        :rtype bool
+        """
+        return False
+
+    def clickable_map_url(self, obj):
+        """
+        Link to google map.
+
+        :param psdnipro.accounts.models.TrackingRecord obj: instance
+        :rtype str
+        """
+        url = obj.map_url
+        title = 'Карта'
+        if url:
+            return '<a href="{url}" target="_blank">{title}</a>'.format(url=url, title=title)
+        return 'недоступно'
+
+    clickable_map_url.allow_tags = True
+    clickable_map_url.short_description = 'Карта'

@@ -65,6 +65,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'psdnipro.accounts.middleware.TrackingMiddleware',
 ]
 
 ROOT_URLCONF = 'psdnipro.urls'
