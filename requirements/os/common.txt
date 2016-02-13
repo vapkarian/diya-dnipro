@@ -8,3 +8,4 @@ memcached
 libpq-dev
 postgresql
 postgresql-contrib
+redis-server

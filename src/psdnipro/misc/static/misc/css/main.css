@@ -272,7 +272,7 @@ header .nav-item {
     background-color: #9c1c1b;
     border-radius: 25px;
     padding: 17px 55px 13px 10px;
-    cursor: default;
+    cursor: pointer;
 }
 
 header a.nav-item {
@@ -664,6 +664,43 @@ footer .legal {
 .content .contacts-list .contact a {
     color: white;
     font-weight: bold;
+}
+
+.content input, .content textarea {
+    float: left;
+    box-sizing: border-box;
+    color: #9d9d9d;
+    width: 500px;
+    min-height: 40px;
+    vertical-align: middle;
+    background-color: #1b1b1b;
+    border: 3px solid #5d5d5d;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin: 5px;
+    font-family: "Times New Roman", serif;
+    font-size: 12pt;
+}
+
+.content input[type="submit"] {
+    border: none;
+    background-color: #9c1c1b;
+    color: white;
+    width: 120px;
+}
+
+.content input.success, .content textarea.success {
+    border-color: green;
+}
+
+.content input.error, .content textarea.error {
+    border-color: red;
+}
+
+.content #feedback-form {
+    margin: auto;
+    width: 510px;
+    padding-top: 20px;
 }
 
 .content #contact-map {

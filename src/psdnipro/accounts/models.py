@@ -6,7 +6,7 @@ from django.db import models
 
 
 __all__ = [
-    'User',
+    'User', 'Feedback',
 ]
 
 
@@ -69,6 +69,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'Користувачі'
         swappable = 'AUTH_USER_MODEL'
 
+    def __str__(self):
+        return self.name
+
     def get_full_name(self):
         """
         Return name of user.
@@ -84,3 +87,17 @@ class User(AbstractBaseUser, PermissionsMixin):
         :rtype: str
         """
         return self.name
+
+
+class Feedback(models.Model):
+    name = models.CharField(max_length=64, verbose_name="Ім'я")
+    email = models.EmailField(verbose_name='Адреса електронної пошти')
+    message = models.TextField(verbose_name='Текст повідомлення')
+    created = models.DateTimeField(default=datetime.now, verbose_name='Дата розміщення')
+
+    class Meta:
+        verbose_name = 'повідомлення'
+        verbose_name_plural = 'Повідомлення'
+
+    def __str__(self):
+        return '{name} ({email})'.format(name=self.name, email=self.email)

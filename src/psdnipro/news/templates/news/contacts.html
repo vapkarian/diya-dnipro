@@ -1,14 +1,29 @@
 {% extends "base.html" %}{% load static from staticfiles %}{% load format_phones %}
 {% block title %}Контакти | {{ block.super }}{% endblock title %}
+{% block extra-js %}
+    <script type="text/javascript" src="{% static 'news/js/contacts.js' %}" defer></script>
+{% endblock extra-js %}
 {% block content %}
     <h1>Контакти</h1>
-    <div class="contacts-list">
-        {% for contact in contacts %}
-            <div class="contact">
-                <p>{{ contact.title }} - {{ contact.phones|format_phones }};</p>
-            </div>
-        {% endfor %}
+    <div class="row">
+        <div class="contacts-list">
+            {% for contact in contacts %}
+                <div class="contact">
+                    <p>{{ contact.title }} - {{ contact.phones|format_phones }};</p>
+                </div>
+            {% endfor %}
+        </div>
+        <iframe id="contact-map" align="right" width="400" height="300" scrolling="no"
+                src="{{ google_map_url }}"></iframe>
     </div>
-    <iframe id="contact-map" align="right" width="400" height="300" scrolling="no"
-            src="{{ google_map_url }}"></iframe>
+    <div class="row">
+        <h1>Зв’язатись з нами</h1>
+        <form action="{% url 'news:contacts' %}" method="post" id="feedback-form">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="row">{{ field }}</div>
+            {% endfor %}
+            <input type="submit" value="Відправити"/>
+        </form>
+    </div>
 {% endblock content %}

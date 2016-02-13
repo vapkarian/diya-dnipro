@@ -33,6 +33,7 @@ SECRET_KEY = 'tr4@t!**z$%v7ijin5#dy*9wo%*_74)v$*xxeu-#0u*8jjbzoa'
 
 DEBUG = False
 ALLOWED_HOSTS = []
+ADMINS = ()
 
 # Application definition
 
@@ -147,8 +148,11 @@ CACHES = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = ''
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
@@ -196,6 +200,15 @@ COMPRESS_JS_FILTERS = [
     'compressor.filters.jsmin.SlimItFilter',
 ]
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
+
+# http://docs.celeryproject.org/en/latest/getting-started/brokers/redis.html
+BROKER_URL = 'redis://localhost:6379/0'
+BROKER_TRANSPORT_OPTIONS = {
+    'visibility_timeout': 3600,
+    'fanout_prefix': True,
+    'fanout_patterns': True,
+}
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 
 try:

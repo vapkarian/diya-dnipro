@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from psdnipro.accounts.forms import CustomUserCreationForm, CustomUserChangeForm
-from psdnipro.accounts.models import User
+from psdnipro.accounts.forms import *
+from psdnipro.accounts.models import *
 
 
 __all__ = [
-    'UserAdmin',
+    'UserAdmin', 'FeedbackAdmin',
 ]
 
 
@@ -42,3 +42,21 @@ class UserAdmin(UserAdmin):
         :rtype bool
         """
         return False
+
+
+@admin.register(Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    fields = ('email', 'message', 'created')
+    list_display = ('email', 'preview', 'created')
+    ordering = ('-created',)
+
+    def preview(self, obj):
+        """
+        First 120 symbols of message.
+
+        :param psdnipro.news.models.Feedback obj: instance
+        :rtype str
+        """
+        if len(obj.message) > 120:
+            return '{}...'.format(obj.message[:117])
+        return obj.message

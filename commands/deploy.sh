@@ -128,3 +128,6 @@ if [ "${CELERY}" = true ]; then
             --loglevel=info --logfile=${DIR}/logs/%n.log
     fi
 fi
+
+# Finish notification
+echo "Successfully deployed!"

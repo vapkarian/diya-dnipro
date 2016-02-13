@@ -1,9 +1,12 @@
 import random
 
+from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
+from psdnipro.accounts.forms import FeedbackForm
 from psdnipro.misc.search import get_query
+from psdnipro.misc.utils import AjaxableResponseMixin
 from psdnipro.news.models import *
 
 
@@ -128,11 +131,20 @@ class DocumentsView(SectionView):
         return queryset
 
 
-class ContactsView(ListView):
-    context_object_name = 'contacts'
-    http_method_names = ['get']
+class ContactsView(AjaxableResponseMixin, CreateView):
+    form_class = FeedbackForm
+    http_method_names = ['get', 'post']
     template_name = 'news/contacts.html'
 
-    def get_queryset(self):
-        queryset = Contact.objects.filter(is_active=True)
-        return queryset
+    def form_valid(self, form):
+        response = super(ContactsView, self).form_valid(form)
+        form.send_mail()
+        return response
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['contacts'] = Contact.objects.filter(is_active=True)
+        return context
+
+    def get_success_url(self):
+        return reverse('news:contacts')
