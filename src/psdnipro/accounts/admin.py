@@ -6,7 +6,7 @@ from psdnipro.accounts.models import *
 
 
 __all__ = [
-    'UserAdmin', 'FeedbackAdmin',
+    'UserAdmin', 'FeedbackAdmin', 'TrackingRecordAdmin',
 ]
 
 
@@ -33,16 +33,6 @@ class UserAdmin(UserAdmin):
     filter_horizontal = ('groups', 'user_permissions',)
     save_on_top = True
 
-    def has_delete_permission(self, request, obj=None):
-        """
-        Prevent deleting objects by admins.
-
-        :param django.http.HttpRequest request: metadata about request
-        :param psdnipro.accounts.models.User obj: instance
-        :rtype bool
-        """
-        return False
-
 
 @admin.register(Feedback)
 class FeedbackAdmin(admin.ModelAdmin):
@@ -55,16 +45,6 @@ class FeedbackAdmin(admin.ModelAdmin):
     def has_add_permission(self, request, obj=None):
         """
         Prevent adding objects by admins.
-
-        :param django.http.HttpRequest request: metadata about request
-        :param psdnipro.accounts.models.Feedback obj: instance
-        :rtype bool
-        """
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        """
-        Prevent deleting objects by admins.
 
         :param django.http.HttpRequest request: metadata about request
         :param psdnipro.accounts.models.Feedback obj: instance
@@ -105,16 +85,6 @@ class TrackingRecordAdmin(admin.ModelAdmin):
     def has_add_permission(self, request, obj=None):
         """
         Prevent adding objects by admins.
-
-        :param django.http.HttpRequest request: metadata about request
-        :param psdnipro.accounts.models.TrackingRecord obj: instance
-        :rtype bool
-        """
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        """
-        Prevent deleting objects by admins.
 
         :param django.http.HttpRequest request: metadata about request
         :param psdnipro.accounts.models.TrackingRecord obj: instance

@@ -39,4 +39,4 @@ class TeamMemberSitemap(Sitemap):
     priority = 0.6
 
     def items(self):
-        return TeamMember.objects.filter(is_active=True)
+        return TeamMember.objects.filter(categories__isnull=False).distinct().order_by('id')

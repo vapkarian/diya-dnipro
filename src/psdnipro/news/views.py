@@ -20,7 +20,7 @@ class SectionView(ListView):
     category = None
 
     def dispatch(self, request, *args, **kwargs):
-        self.category = get_object_or_404(Category, is_active=True, url=self.kwargs['url'])
+        self.category = get_object_or_404(Category, url=self.kwargs['url'])
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -106,7 +106,7 @@ class TeamView(SectionView):
     template_name = 'news/team.html'
 
     def get_queryset(self):
-        queryset = TeamMember.objects.filter(categories=self.category, is_active=True).order_by('id')
+        queryset = TeamMember.objects.filter(categories=self.category).order_by('id')
         return queryset
 
 
@@ -116,10 +116,6 @@ class TeamMemberView(DetailView):
     model = TeamMember
     template_name = 'news/member.html'
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(is_active=True)
-
 
 class DocumentsView(SectionView):
     context_object_name = 'documents'
@@ -127,7 +123,7 @@ class DocumentsView(SectionView):
     template_name = 'news/documents.html'
 
     def get_queryset(self):
-        queryset = Document.objects.filter(category=self.category, is_active=True).order_by('id')
+        queryset = Document.objects.filter(categories=self.category).order_by('id')
         return queryset
 
 
@@ -143,7 +139,7 @@ class ContactsView(AjaxableResponseMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['contacts'] = Contact.objects.filter(is_active=True)
+        context['contacts'] = Contact.objects.order_by('id')
         return context
 
     def get_success_url(self):

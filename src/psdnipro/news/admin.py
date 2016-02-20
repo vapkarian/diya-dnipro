@@ -9,20 +9,11 @@ __all__ = [
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'url', 'is_active')
-    list_filter = ('is_active',)
+    fields = ('title', 'url', 'members', 'documents')
+    list_display = ('title', 'url')
+    list_filter = ()
     ordering = ('id',)
     save_on_top = True
-
-    def has_delete_permission(self, request, obj=None):
-        """
-        Prevent deleting objects by admins.
-
-        :param django.http.HttpRequest request: metadata about request
-        :param psdnipro.news.models.Category obj: instance
-        :rtype bool
-        """
-        return False
 
 
 @admin.register(Article)
@@ -34,53 +25,21 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ('title', 'text')
     save_on_top = True
 
-    def has_delete_permission(self, request, obj=None):
-        """
-        Prevent deleting objects by admins.
-
-        :param django.http.HttpRequest request: metadata about request
-        :param psdnipro.news.models.Article obj: instance
-        :rtype bool
-        """
-        return False
-
 
 @admin.register(TeamMember)
 class TeamMemberAdmin(admin.ModelAdmin):
-    filter_horizontal = ('categories',)
-    list_display = ('name', 'position', 'is_active')
-    list_filter = ('is_active', 'categories')
+    list_display = ('name', 'position')
+    list_filter = ('categories',)
     ordering = ('id',)
     save_on_top = True
-
-    def has_delete_permission(self, request, obj=None):
-        """
-        Prevent deleting objects by admins.
-
-        :param django.http.HttpRequest request: metadata about request
-        :param psdnipro.news.models.TeamMember obj: instance
-        :rtype bool
-        """
-        return False
 
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ('title', 'clickable_url', 'category', 'is_active')
-    list_filter = ('is_active', 'category')
-    list_select_related = ('category',)
+    list_display = ('title', 'clickable_url')
+    list_filter = ('categories', )
     ordering = ('id',)
     save_on_top = True
-
-    def has_delete_permission(self, request, obj=None):
-        """
-        Prevent deleting objects by admins.
-
-        :param django.http.HttpRequest request: metadata about request
-        :param psdnipro.news.models.Document obj: instance
-        :rtype bool
-        """
-        return False
 
     def clickable_url(self, obj):
         """
@@ -97,17 +56,7 @@ class DocumentAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('title', 'phones', 'is_active')
-    list_filter = ('is_active',)
+    list_display = ('title', 'phones')
+    list_filter = ()
     ordering = ('id',)
     save_on_top = True
-
-    def has_delete_permission(self, request, obj=None):
-        """
-        Prevent deleting objects by admins.
-
-        :param django.http.HttpRequest request: metadata about request
-        :param psdnipro.news.models.Category obj: instance
-        :rtype bool
-        """
-        return False

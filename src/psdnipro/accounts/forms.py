@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from psdnipro.accounts.models import Feedback
+from psdnipro.accounts.models import *
 from psdnipro.accounts.tasks import send_mail
 from psdnipro.misc.models import SiteSetting
 

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'dbdump',
+    'sortedm2m',
     'psdnipro.accounts',
     'psdnipro.misc',
     'psdnipro.news',

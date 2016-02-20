@@ -15,7 +15,7 @@ def navigation_links(request):
     :param django.http.HttpRequest request: metadata about request
     :rtype: dict
     """
-    return {'navigation_links': Category.objects.filter(is_active=True).order_by('id')}
+    return {'navigation_links': Category.objects.order_by('id')}
 
 
 def last_articles(request):

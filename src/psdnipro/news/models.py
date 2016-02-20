@@ -6,6 +6,7 @@ from django.db import models
 from django.templatetags.static import static
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
+from sortedm2m.fields import SortedManyToManyField
 
 
 __all__ = [
@@ -16,7 +17,10 @@ __all__ = [
 class Category(models.Model):
     title = models.CharField(max_length=64, verbose_name='Назва')
     url = models.CharField(max_length=128, verbose_name='Посилання')
-    is_active = models.BooleanField(default=True, verbose_name='Відображати?')
+    members = SortedManyToManyField('TeamMember', related_name='categories', blank=True,
+                                    verbose_name='Персони')
+    documents = SortedManyToManyField('Document', related_name='categories', blank=True,
+                                      verbose_name='Документи')
 
     class Meta:
         verbose_name = 'запис категорії'
@@ -32,7 +36,7 @@ class Category(models.Model):
 class Article(models.Model):
     DEFAULT_IMAGE = static('news/img/default-preview.png')
 
-    category = models.ForeignKey(Category, related_name='articles', verbose_name='Категорія')
+    category = models.ForeignKey('Category', related_name='articles', verbose_name='Категорія')
     title = models.TextField(verbose_name='Назва')
     image = models.ImageField(upload_to='uploads/', null=True, blank=True, verbose_name='Основне зображення до статті',
                               help_text=mark_safe('Якщо не обрано, за замовчуванням використовується <a href="{}" '
@@ -65,12 +69,10 @@ class Article(models.Model):
 
 
 class TeamMember(models.Model):
-    categories = models.ManyToManyField(Category, related_name='members', verbose_name='Категорії')
     name = models.CharField(max_length=128, verbose_name="Ім'я")
     position = models.CharField(max_length=128, verbose_name='Посада')
     photo = models.ImageField(upload_to='photos/', verbose_name='Світлина')
     bio = models.TextField(blank=True, verbose_name='Анкета')
-    is_active = models.BooleanField(default=True, verbose_name='Відображати?')
 
     class Meta:
         verbose_name = 'запис персони'
@@ -84,11 +86,9 @@ class TeamMember(models.Model):
 
 
 class Document(models.Model):
-    category = models.ForeignKey(Category, related_name='documents', verbose_name='Категорія')
     title = models.TextField(verbose_name='Назва')
     description = models.TextField(verbose_name='Опис', blank=True)
     url = models.URLField(verbose_name='Посилання')
-    is_active = models.BooleanField(default=True, verbose_name='Відображати?')
 
     class Meta:
         verbose_name = 'документ'
@@ -101,7 +101,6 @@ class Document(models.Model):
 class Contact(models.Model):
     title = models.CharField(max_length=32)
     phones = models.TextField()
-    is_active = models.BooleanField(default=True, verbose_name='Відображати?')
 
     class Meta:
         verbose_name = 'контакт'
