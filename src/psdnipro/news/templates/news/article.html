@@ -8,9 +8,11 @@
             <div class="article-date">{{ article.created|date:"d.m.Y" }}</div>
         </div>
         <div class="row">
-            <a class="article-image" href="{{ article.image_url }}" target="_blank">
-                <img alt="Зображення" src="{{ article.image_url }}"/>
-            </a>
+            {% if article.image %}
+                <a class="article-image" href="{{ article.image.url }}" target="_blank">
+                    <img alt="Зображення" src="{{ article.image.url }}"/>
+                </a>
+            {% endif %}
             <div class="article-title">{{ article.title }}</div>
             <div class="article-text">
                 {% autoescape on %}

@@ -6,6 +6,7 @@ from django.db import models
 from django.templatetags.static import static
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
+from easy_thumbnails.files import get_thumbnailer
 from sortedm2m.fields import SortedManyToManyField
 
 
@@ -34,13 +35,10 @@ class Category(models.Model):
 
 
 class Article(models.Model):
-    DEFAULT_IMAGE = static('news/img/default-preview.png')
-
     category = models.ForeignKey('Category', related_name='articles', verbose_name='Категорія')
     title = models.TextField(verbose_name='Назва')
     image = models.ImageField(upload_to='uploads/', null=True, blank=True, verbose_name='Основне зображення до статті',
-                              help_text=mark_safe('Якщо не обрано, за замовчуванням використовується <a href="{}" '
-                                                  'target="_blank">стандартне зображення</a>.'.format(DEFAULT_IMAGE)))
+                              help_text=mark_safe('Якщо не обрано, буде використано стандартне зображення.'))
     text = RichTextUploadingField(verbose_name='Текст новини')
     created = models.DateTimeField(default=datetime.now, verbose_name='Дата розміщення')
     is_top = models.BooleanField(default=False, verbose_name='Додати до топу?')
@@ -57,15 +55,22 @@ class Article(models.Model):
         return reverse('news:article', args=(self.id,))
 
     @cached_property
-    def image_url(self):
-        """
-        Return url to the main image file if it exists, otherwise return default article image.
-
-        :rtype: str
-        """
+    def top_thumbnail(self):
         if self.image:
-            return self.image.url
-        return self.DEFAULT_IMAGE
+            options = {'size': (727, 378), 'crop': ',0'}
+            url = get_thumbnailer(self.image).get_thumbnail(options).url
+        else:
+            url = static('news/img/top-thumbnail-default.jpg')
+        return url
+
+    @cached_property
+    def preview_thumbnail(self):
+        if self.image:
+            options = {'size': (127, 95), 'crop': ',0'}
+            url = get_thumbnailer(self.image).get_thumbnail(options).url
+        else:
+            url = static('news/img/preview-thumbnail-default.png')
+        return url
 
 
 class TeamMember(models.Model):
