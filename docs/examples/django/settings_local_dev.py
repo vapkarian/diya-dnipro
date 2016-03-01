@@ -1,4 +1,4 @@
-from psdnipro.settings import INSTALLED_APPS, DATABASES, TEMPLATES
+from diya_dnipro.settings import INSTALLED_APPS, DATABASES, TEMPLATES
 
 
 INSTALLED_APPS.append('debug_toolbar')

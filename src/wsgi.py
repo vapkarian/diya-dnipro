@@ -1,5 +1,5 @@
 """
-WSGI config for psdnipro project.
+WSGI config for diya_dnipro project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -13,7 +13,7 @@ import sys
 from django.core.wsgi import get_wsgi_application
 
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "psdnipro.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "diya_dnipro.settings")
 PROJECT_SRC = os.path.abspath(os.path.dirname(__file__))
 if PROJECT_SRC not in sys.path:
     sys.path.insert(0, PROJECT_SRC)

@@ -123,7 +123,7 @@ touch ${DIR}/src/wsgi.py
 # Start celery worker if celery was installed
 if [ "${CELERY}" = true ]; then
     if [ -r ${DIR}/env/bin/celery ]; then
-        ${DIR}/env/bin/celery multi start -A psdnipro worker -B --events --workdir=${DIR}/src \
+        ${DIR}/env/bin/celery multi start -A diya_dnipro worker -B --events --workdir=${DIR}/src \
             --pidfile=${DIR}/pids/%n.pid --schedule=${DIR}/pids/celerybeat-schedule \
             --loglevel=info --logfile=${DIR}/logs/%n.log
     fi

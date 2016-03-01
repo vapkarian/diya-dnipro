@@ -8,5 +8,5 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 
 # Start celery monitoring if celery was installed
 if [ -r ${DIR}/env/bin/celery ]; then
-    ${DIR}/env/bin/celery -A psdnipro events --workdir=${DIR}/src
+    ${DIR}/env/bin/celery -A diya_dnipro events --workdir=${DIR}/src
 fi

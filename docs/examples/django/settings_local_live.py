@@ -1,4 +1,4 @@
-from psdnipro.settings import DATABASES, STATICFILES_FINDERS
+from diya_dnipro.settings import DATABASES, STATICFILES_FINDERS
 
 
 DATABASES['default']['USER'] = '{DB_USER}'
