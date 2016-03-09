@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'NarbutClassic';
+    src: url('../fonts/NarbutClassic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Blagovest';
+    src: url('../fonts/Blagovest.ttf') format('truetype');
+}

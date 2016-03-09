@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% load static from staticfiles %}
+{% block extra-css %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/news.css' %}" />
+{% endblock extra-css %}

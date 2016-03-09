@@ -1,14 +1,19 @@
-{% extends "base.html" %}{% load static from staticfiles %}
+{% extends "news/base.html" %}{% load static from staticfiles %}
 {% block title %}Головна | {{ block.super }}{% endblock title %}
+{% block extra-css %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/slider.css' %}" />
+{% endblock extra-css %}
 {% block extra-js %}
-    <script src="{% static 'misc/js/assets.js' %}" defer></script>
+    {{ block.super }}
+    <script src="{% static 'misc/js/slider.js' %}" defer></script>
 {% endblock extra-js %}
 {% block content %}
     {% if top_articles %}
-        <div class="main_slider" data-rotation="target: .slides > div; pickerItems:.picker > div; interval: 5;">
+        <div class="main_slider">
             <div class="slides">
                 {% for article in top_articles %}
-                    <div {% if forloop.first %}class="active"{% endif %}>
+                    <div class="wrapper" data-pos="{{ forloop.counter }}">
                         <div class="title">
                             <a class="txt" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
                         </div>
@@ -19,7 +24,7 @@
             <div class="picker">
                 <span class="caption">ТОП</span>
                 {% for article in top_articles %}
-                    <div data-pos="{{ forloop.counter }}" {% if forloop.first %}class="active"{% endif %}>&nbsp;</div>
+                    <div class="pick" data-pos="{{ forloop.counter }}">&nbsp;</div>
                 {% endfor %}
             </div>
         </div>
