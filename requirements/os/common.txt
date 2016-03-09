@@ -4,7 +4,6 @@ python3-setuptools
 virtualenv
 gcc
 libjpeg8-dev
-memcached
 libpq-dev
 postgresql
 postgresql-contrib
