@@ -213,6 +213,14 @@ BROKER_TRANSPORT_OPTIONS = {
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 
+THUMBNAIL_ALIASES = {
+    'news': {
+        'top': {'size': (727, 378), 'crop': ',0'},
+        'preview': {'size': (127, 95), 'crop': ',0'},
+    },
+}
+
+
 try:
     from diya_dnipro.settings_local import *
 except ImportError:

@@ -2,7 +2,7 @@
 {% block title %}Головна | {{ block.super }}{% endblock title %}
 {% block extra-css %}
     {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{% static 'news/css/slider.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/slider.css' %}"/>
 {% endblock extra-css %}
 {% block extra-js %}
     {{ block.super }}
@@ -17,7 +17,7 @@
                         <div class="title">
                             <a class="txt" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
                         </div>
-                        <img src="{{ article.top_thumbnail }}" alt="{{ article.title }}" width="727"/>
+                        <img src="{{ article.top_thumbnail }}" alt="{{ article.title }}" width="727" height="429"/>
                     </div>
                 {% endfor %}
             </div>

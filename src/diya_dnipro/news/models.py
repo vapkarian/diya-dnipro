@@ -57,8 +57,7 @@ class Article(models.Model):
     @cached_property
     def top_thumbnail(self):
         if self.image:
-            options = {'size': (727, 378), 'crop': ',0'}
-            url = get_thumbnailer(self.image).get_thumbnail(options).url
+            url = get_thumbnailer(self.image)['top'].url
         else:
             url = static('news/img/top-thumbnail-default.jpg')
         return url
@@ -66,8 +65,7 @@ class Article(models.Model):
     @cached_property
     def preview_thumbnail(self):
         if self.image:
-            options = {'size': (127, 95), 'crop': ',0'}
-            url = get_thumbnailer(self.image).get_thumbnail(options).url
+            url = get_thumbnailer(self.image)['preview'].url
         else:
             url = static('news/img/preview-thumbnail-default.png')
         return url
