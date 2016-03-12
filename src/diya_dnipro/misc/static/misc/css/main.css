@@ -269,7 +269,7 @@ header .nav-item.hovered {
     background: #1b1b1b url('../img/arrow.png') no-repeat 92% center;
 }
 
-header .nav-item.home {
+header .nav-item.alone {
     background: none;
 }
 
