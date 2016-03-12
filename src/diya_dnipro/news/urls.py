@@ -1,4 +1,5 @@
 from django.conf.urls import url
+
 from diya_dnipro.news.views import *
 
 
@@ -8,6 +9,7 @@ __all__ = [
 
 urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
+    url(r'^all/$', AllView.as_view(), name='all'),
     url(r'^category/(?P<url>.+)/$', CategoryView.as_view(), name='category'),
     url(r'^search/$', SearchView.as_view(), name='search'),
     url(r'^article/(?P<pk>\d+)/$', ArticleView.as_view(), name='article'),

@@ -1,0 +1,8 @@
+{% extends "news/base.html" %}
+{% block title %}Новини | {{ block.super }}{% endblock title %}
+{% block content %}
+    <h1>Новини</h1>
+    {% include 'news/parts/news-list.html' with articles=articles only %}
+    {% url 'news:all' as target_url %}
+    {% include 'misc/parts/pagination.html' with target_url=target_url page_obj=page_obj only %}
+{% endblock content %}

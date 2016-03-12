@@ -11,7 +11,7 @@ from diya_dnipro.news.models import *
 
 
 __all__ = [
-    'HomeView', 'CategoryView', 'SearchView', 'ArticleView', 'TeamView', 'TeamMemberView', 'DocumentsView',
+    'HomeView', 'AllView', 'CategoryView', 'SearchView', 'ArticleView', 'TeamView', 'TeamMemberView', 'DocumentsView',
     'ContactsView',
 ]
 
@@ -39,6 +39,16 @@ class HomeView(ListView):
         queryset = list(queryset)
         random.shuffle(queryset)
         queryset = sorted(queryset[:6], key=lambda x: x.created, reverse=True)
+        return queryset
+
+
+class AllView(ListView):
+    context_object_name = 'articles'
+    http_method_names = ['get']
+    template_name = 'news/all.html'
+
+    def get_queryset(self):
+        queryset = Article.objects.filter(is_active=True).order_by('-created')
         return queryset
 
 

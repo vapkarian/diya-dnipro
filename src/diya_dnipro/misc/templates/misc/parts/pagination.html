@@ -1,11 +1,11 @@
 <div class="pagination">
     {% if page_obj.has_previous %}
-        <a href="{{ target_url }}?page={{ page_obj.previous_page_number }}&{{ get_uqery }}"
+        <a href="{{ target_url }}?page={{ page_obj.previous_page_number }}&{{ get_query }}"
            class="icon item prev">&lt;</a>
     {% endif %}
     {% for page in page_obj.paginator.page_range %}
         <a class="item {% if page == page_obj.number %}active{% endif %}"
-           href="{{ target_url }}?page={{ page }}&{{ get_uqery }}">{{ page }}</a>
+           href="{{ target_url }}?page={{ page }}&{{ get_query }}">{{ page }}</a>
     {% endfor %}
     {% if page_obj.has_next %}
         <a href="{{ target_url }}?page={{ page_obj.next_page_number }}&{{ get_uqery }}"
