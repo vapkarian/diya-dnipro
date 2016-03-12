@@ -45,6 +45,7 @@ class HomeView(ListView):
 class AllView(ListView):
     context_object_name = 'articles'
     http_method_names = ['get']
+    paginate_by = 10
     template_name = 'news/all.html'
 
     def get_queryset(self):
