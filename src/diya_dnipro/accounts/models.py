@@ -13,14 +13,9 @@ __all__ = [
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(self, email: str, password: str = None, **extra_fields):  # TODO: add typing for User
         """
         Create and save a general user with the given credentials.
-
-        :param str email: given email address
-        :param str password: given raw password
-        :param dict extra_fields: additional parameters of User model
-        :rtype: diya_dnipro.accounts.models.User
         """
         if not email:
             raise ValueError('The given email must be set')
@@ -32,14 +27,9 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
-    def create_superuser(self, email, password, **extra_fields):
+    def create_superuser(self, email: str, password: str = None, **extra_fields):  # TODO: add typing for User
         """
         Create and save a super admin with the given credentials.
-
-        :param str email: given email address
-        :param str password: given raw password
-        :param dict extra_fields: additional parameters of User model
-        :rtype: diya_dnipro.accounts.models.User
         """
         if extra_fields.setdefault('is_staff', True) is not True:
             raise ValueError('Superuser must have is_staff=True.')
@@ -69,23 +59,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'Користувачі'
         swappable = 'AUTH_USER_MODEL'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
-    def get_full_name(self):
-        """
-        Return name of user.
-
-        :rtype: str
-        """
+    def get_full_name(self) -> str:
         return self.name
 
-    def get_short_name(self):
-        """
-        Return name of user.
-
-        :rtype: str
-        """
+    def get_short_name(self) -> str:
         return self.name
 
 
@@ -99,7 +79,7 @@ class Feedback(models.Model):
         verbose_name = 'повідомлення'
         verbose_name_plural = 'Повідомлення'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return '{name} ({email})'.format(name=self.name, email=self.email)
 
 
@@ -124,11 +104,11 @@ class TrackingRecord(models.Model):
         verbose_name = 'запис відстеження'
         verbose_name_plural = 'Записи відстеження'
 
-    def __str__(self):
-        return '123'.format()
+    def __str__(self) -> str:
+        return '{ip} ({device} {os} {browser})'.format(ip=self.ip, device=self.device, os=self.os, browser=self.browser)
 
     @property
-    def map_url(self):
+    def map_url(self) -> str:
         url = ''
         if self.coordinates:
             latitude, longitude = self.coordinates.split(',')
@@ -136,7 +116,7 @@ class TrackingRecord(models.Model):
         return url
 
     @staticmethod
-    def _shorten_value(family, version):
+    def _shorten_value(family: str, version: str) -> str:
         value = ''
         if family:
             value = family
@@ -145,13 +125,13 @@ class TrackingRecord(models.Model):
         return value
 
     @property
-    def browser(self):
+    def browser(self) -> str:
         return self._shorten_value(self.browser_family, self.browser_version)
 
     @property
-    def os(self):
+    def os(self) -> str:
         return self._shorten_value(self.os_family, self.os_version)
 
     @property
-    def device(self):
+    def device(self) -> str:
         return self._shorten_value(self.device_brand, self.device_family)

@@ -1,3 +1,4 @@
+from typing import Iterable
 import re
 
 from django.db.models import Q
@@ -43,13 +44,9 @@ STOP_WORDS = [
 ]
 
 
-def get_query(query_string, search_fields):
+def get_query(query_string: str, search_fields: Iterable[str]) -> Q:
     """
     Return a query which is a combination of Q objects for normalized query string.
-
-    :param str query_string: search query submitted by user
-    :param list[str] search_fields: list of model's fields
-    :rtype: django.db.models.Q
     """
     query_string = re.sub('\s\s+', ' ', query_string.strip())
     terms = []

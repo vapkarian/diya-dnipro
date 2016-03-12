@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.http import HttpRequest
 
 from diya_dnipro.accounts.forms import *
 from diya_dnipro.accounts.models import *
@@ -42,23 +43,10 @@ class FeedbackAdmin(admin.ModelAdmin):
     readonly_fields = ('email', 'message', 'created')
     save_on_top = True
 
-    def has_add_permission(self, request, obj=None):
-        """
-        Prevent adding objects by admins.
-
-        :param django.http.HttpRequest request: metadata about request
-        :param diya_dnipro.accounts.models.Feedback obj: instance
-        :rtype bool
-        """
+    def has_add_permission(self, request: HttpRequest, obj: Feedback = None) -> bool:
         return False
 
-    def preview(self, obj):
-        """
-        First 120 symbols of message.
-
-        :param diya_dnipro.news.models.Feedback obj: instance
-        :rtype str
-        """
+    def preview(self, obj: Feedback) -> str:
         if len(obj.message) > 120:
             return '{}...'.format(obj.message[:117])
         return obj.message
@@ -82,23 +70,10 @@ class TrackingRecordAdmin(admin.ModelAdmin):
     ordering = ('-created',)
     save_on_top = True
 
-    def has_add_permission(self, request, obj=None):
-        """
-        Prevent adding objects by admins.
-
-        :param django.http.HttpRequest request: metadata about request
-        :param diya_dnipro.accounts.models.TrackingRecord obj: instance
-        :rtype bool
-        """
+    def has_add_permission(self, request: HttpRequest, obj: TrackingRecord = None) -> bool:
         return False
 
-    def clickable_map_url(self, obj):
-        """
-        Link to google map.
-
-        :param diya_dnipro.accounts.models.TrackingRecord obj: instance
-        :rtype str
-        """
+    def clickable_map_url(self, obj: TrackingRecord) -> str:
         url = obj.map_url
         title = 'Карта'
         if url:

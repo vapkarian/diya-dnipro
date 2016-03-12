@@ -3,6 +3,13 @@ from fractions import Fraction
 from django.core.cache import cache
 from django.db import models
 
+from diya_dnipro.misc.types import T
+
+
+__all__ = [
+    'SiteSetting',
+]
+
 
 class SiteSetting(models.Model):
     """
@@ -28,48 +35,35 @@ class SiteSetting(models.Model):
         verbose_name = 'Налаштування'
         verbose_name_plural = 'Налаштування'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return '{key} = {value}'.format(key=self.key, value=self.value)
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         """
         Reset cached value of SiteSetting object.
-
-        :param list args: arbitrary argument list
-        :param dict kwargs: keyword arguments
         """
         cache.delete(SiteSetting.cached_key(self.key))
         return super(SiteSetting, self).save(*args, **kwargs)
 
-    def delete(self, *args, **kwargs):
+    def delete(self, *args, **kwargs) -> dict:
         """
         Reset cached value of SiteSetting object.
-
-        :param list args: arbitrary argument list
-        :param dict kwargs: keyword arguments
         """
         cache.delete(SiteSetting.cached_key(self.key))
         return super(SiteSetting, self).delete(*args, **kwargs)
 
     @classmethod
-    def cached_key(cls, key):
+    def cached_key(cls, key: str) -> str:
         """
         Form cached key for given raw key.
-
-        :param str key: given raw key.
-        :rtype: str
         """
         return 'misc:site_setting:{key}'.format(key=key)
 
     @classmethod
-    def get_value(cls, key, default=None):
+    def get_value(cls, key: str, default: T = None) -> T:
         """
         Get value for given key. If key doesn't exist, default will be return if it is present, otherwise DoesNotExist
         will be raised.
-
-        :param str key: given key
-        :param str|int|float|Fraction default: default value if key doesn't exist
-        :rtype: str|int|float|Fraction
         """
         converters = {
             0: str,

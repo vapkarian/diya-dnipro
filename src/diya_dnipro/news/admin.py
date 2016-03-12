@@ -37,16 +37,13 @@ class TeamMemberAdmin(admin.ModelAdmin):
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
     list_display = ('title', 'clickable_url')
-    list_filter = ('categories', )
+    list_filter = ('categories',)
     ordering = ('id',)
     save_on_top = True
 
-    def clickable_url(self, obj):
+    def clickable_url(self, obj: Document) -> str:
         """
         Link to the document.
-
-        :param diya_dnipro.news.models.Document obj: instance
-        :rtype str
         """
         return '<a href="{url}" target="_blank">{title}</a>'.format(url=obj.url, title=obj.title)
 

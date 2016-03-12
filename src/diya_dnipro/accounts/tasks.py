@@ -1,3 +1,6 @@
+from typing import Iterable
+
+from diya_dnipro.accounts.types import ReplyTo, Attachment
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
@@ -14,18 +17,10 @@ __all__ = [
 
 
 @celery_app.task
-def send_mail(emails, subject, text_template, html_template=None, extra_context=None, attachments=None, reply_to=None):
+def send_mail(emails: Iterable[str], subject: str, text_template: str, html_template: str = None,
+              extra_context: dict = None, attachments: Attachment = None, reply_to: ReplyTo = None) -> None:
     """
     Send email message.
-
-    :param list[unicode] emails: list of email addresses
-    :param unicode subject: subject of email
-    :param dict extra_context: context of html/txt templates
-    :param str text_template: path to the main text template
-    :param str html_template: path to the alternative non-required html template
-    :param list[tuple[str, object, str]] attachments: list of triples `filename` - `content` - `mimetype`
-        for attachments
-    :param tuple[str, str] reply_to: pair of name and email of `Reply-To` section
     """
     emails = [email for email in emails if bool(email)]
     if not emails:
@@ -45,13 +40,14 @@ def send_mail(emails, subject, text_template, html_template=None, extra_context=
         html_content = get_template(html_template).render(context)
         msg.attach_alternative(html_content, 'text/html')
     if attachments is not None:
+        # TODO: fix typing of attachment
         for filename, content, mimetype in attachments:
             msg.attach(filename, content, mimetype)
     msg.send()
 
 
 @celery_app.task
-def parse_tracking_info(ua_string, ip, referrer):
+def parse_tracking_info(ua_string: str, ip: str, referrer: str) -> TrackingRecord:
     fields = {'ua_string': ua_string, 'ip': ip, 'referrer': referrer}
 
     if ua_string:
@@ -80,4 +76,5 @@ def parse_tracking_info(ua_string, ip, referrer):
             fields['country'] = ip_info.get('country')
 
     fields = {key: value or '' for key, value in fields.items()}
-    TrackingRecord.objects.create(**fields)
+    record = TrackingRecord.objects.create(**fields)
+    return record

@@ -1,3 +1,5 @@
+from django.http import HttpRequest
+
 from diya_dnipro.accounts.tasks import parse_tracking_info
 
 
@@ -11,12 +13,7 @@ class TrackingMiddleware(object):
     Store UTM information received from referrers.
     """
 
-    def process_request(self, request):
-        """
-        Save UTM information from GET parameters or cookies.
-
-        :param django.http.HttpRequest request: metadata about request
-        """
+    def process_request(self, request: HttpRequest) -> None:
         if 'tracked' in request.session:
             return
 

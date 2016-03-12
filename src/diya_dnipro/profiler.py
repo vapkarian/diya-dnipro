@@ -15,7 +15,7 @@ __all__ = [
 PROFILE_LOG_BASE = getattr(settings, 'PROFILE_LOG_BASE', rel_path('..', 'logs'))
 
 
-def profile(log_file):
+def profile(log_file: str):
     """
     Profile some callable.
 
@@ -49,7 +49,7 @@ def profile(log_file):
     return _outer
 
 
-def line_profile(log_file=None, show=False):
+def line_profile(log_file: str = None, show: bool = False):
     """
     Decorator to wrap function with line-by-line profiler http://pythonhosted.org/line_profiler/
 
@@ -58,9 +58,6 @@ def line_profile(log_file=None, show=False):
 
     To view stored profile data use:
         bin/python -m line_profiler path_to_file
-
-    :param str log_file: store data to file (timestamp will be added)
-    :param bool show: print stats to stdout
     """
     if log_file is not None and not os.path.isabs(log_file):
         log_file = os.path.join(PROFILE_LOG_BASE, log_file)

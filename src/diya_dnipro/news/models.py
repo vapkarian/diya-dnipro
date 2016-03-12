@@ -10,6 +10,9 @@ from easy_thumbnails.files import get_thumbnailer
 from sortedm2m.fields import SortedManyToManyField
 
 
+from diya_dnipro.types import Url
+
+
 __all__ = [
     'Category', 'Article', 'TeamMember', 'Document', 'Contact',
 ]
@@ -27,10 +30,10 @@ class Category(models.Model):
         verbose_name = 'запис категорії'
         verbose_name_plural = 'Категорії'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> Url:
         return reverse('news:category', args=(self.url,))
 
 
@@ -48,14 +51,14 @@ class Article(models.Model):
         verbose_name = 'запис новини'
         verbose_name_plural = 'Новини'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> Url:
         return reverse('news:article', args=(self.id,))
 
     @cached_property
-    def top_thumbnail(self):
+    def top_thumbnail(self) -> Url:
         if self.image:
             url = get_thumbnailer(self.image)['top'].url
         else:
@@ -63,7 +66,7 @@ class Article(models.Model):
         return url
 
     @cached_property
-    def preview_thumbnail(self):
+    def preview_thumbnail(self) -> Url:
         if self.image:
             url = get_thumbnailer(self.image)['preview'].url
         else:
@@ -81,10 +84,10 @@ class TeamMember(models.Model):
         verbose_name = 'запис персони'
         verbose_name_plural = 'Персони'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> Url:
         return reverse('news:member', args=(self.id,))
 
 
@@ -97,7 +100,7 @@ class Document(models.Model):
         verbose_name = 'документ'
         verbose_name_plural = 'Документи'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
 
@@ -109,5 +112,5 @@ class Contact(models.Model):
         verbose_name = 'контакт'
         verbose_name_plural = 'Контакти'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title

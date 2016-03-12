@@ -1,12 +1,11 @@
+from django.http import HttpRequest
+
 from diya_dnipro.misc.models import SiteSetting
 
 
-def social_icons(request):
+def social_icons(request: HttpRequest) -> dict:
     """
     Cached social links for header and footer.
-
-    :param django.http.HttpRequest request: metadata about request
-    :rtype: dict
     """
     return {
         'vkontakte_url': SiteSetting.get_value('vkontakte_url', '#'),

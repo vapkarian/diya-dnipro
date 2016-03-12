@@ -1,4 +1,5 @@
-from django.http import JsonResponse
+from django.forms import BaseForm
+from django.http import JsonResponse, HttpResponse
 
 
 class AjaxableResponseMixin(object):
@@ -7,15 +8,15 @@ class AjaxableResponseMixin(object):
     """
     request = None
 
-    def form_invalid(self, form):
-        response = super(AjaxableResponseMixin, self).form_invalid(form)
+    def form_invalid(self, form: BaseForm) -> HttpResponse:
+        response = super().form_invalid(form)
         if self.request.is_ajax():
             return JsonResponse(form.errors, status=400)
         else:
             return response
 
-    def form_valid(self, form):
-        response = super(AjaxableResponseMixin, self).form_valid(form)
+    def form_valid(self, form: BaseForm) -> HttpResponse:
+        response = super().form_valid(form)
         if self.request.is_ajax():
             response = JsonResponse({})
         return response

@@ -38,17 +38,19 @@ class FeedbackForm(forms.ModelForm):
         model = Feedback
         fields = ('name', 'email', 'message')
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         for field_name in self._meta.fields:
             field = self.fields[field_name]
             field.widget.attrs['placeholder'] = field.label + ' *'
 
-    def clean_email2(self):
-        if self.cleaned_data.get('email2'):
+    def clean_email2(self) -> str:
+        email2 = self.cleaned_data.get('email2')
+        if email2:
             raise forms.ValidationError("Некоректний формат")
+        return email2
 
-    def send_mail(self):
+    def send_mail(self) -> None:
         emails = [elem[1] for elem in settings.ADMINS]
         emails.append(SiteSetting.get_value('mail_url', ''))
         data = {

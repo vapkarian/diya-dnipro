@@ -1,6 +1,10 @@
 import random
+from diya_dnipro.types import Url
 
 from django.core.urlresolvers import reverse
+from django.db.models import QuerySet
+from django.forms import BaseForm
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView
 
@@ -19,11 +23,11 @@ __all__ = [
 class SectionView(ListView):
     category = None
 
-    def dispatch(self, request, *args, **kwargs):
+    def dispatch(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         self.category = get_object_or_404(Category, url=self.kwargs['url'])
         return super().dispatch(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
         context['category'] = self.category
         return context
@@ -34,7 +38,7 @@ class HomeView(ListView):
     http_method_names = ['get']
     template_name = 'news/home.html'
 
-    def get_queryset(self):
+    def get_queryset(self) -> list:
         queryset = Article.objects.filter(is_active=True, is_top=False).order_by('-created')[:15]
         queryset = list(queryset)
         random.shuffle(queryset)
@@ -48,7 +52,7 @@ class AllView(ListView):
     paginate_by = 10
     template_name = 'news/all.html'
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         queryset = Article.objects.filter(is_active=True).order_by('-created')
         return queryset
 
@@ -59,7 +63,7 @@ class CategoryView(SectionView):
     paginate_by = 10
     template_name = 'news/category.html'
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         queryset = Article.objects.filter(category=self.category, is_active=True).order_by('-created')
         return queryset
 
@@ -71,16 +75,16 @@ class SearchView(ListView):
     template_name = 'news/search.html'
     search_query = None
 
-    def dispatch(self, request, *args, **kwargs):
+    def dispatch(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         self.search_query = self.request.GET.get('search', '')
         return super().dispatch(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.search_query
         return context
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         search_query = self.search_query
         entry_query = get_query(search_query, ['title', 'text'])
         queryset = Article.objects.filter(is_active=True).order_by('-created')
@@ -97,7 +101,7 @@ class ArticleView(DetailView):
     model = Article
     template_name = 'news/article.html'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
         same = Article.objects \
             .filter(category=self.object.category, is_active=True) \
@@ -106,7 +110,7 @@ class ArticleView(DetailView):
         context['same_articles'] = same[:6]
         return context
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         queryset = Article.objects.filter(is_active=True)
         return queryset
 
@@ -116,7 +120,7 @@ class TeamView(SectionView):
     http_method_names = ['get']
     template_name = 'news/team.html'
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         queryset = TeamMember.objects.filter(categories=self.category)
         return queryset
 
@@ -133,7 +137,7 @@ class DocumentsView(SectionView):
     http_method_names = ['get']
     template_name = 'news/documents.html'
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         queryset = Document.objects.filter(categories=self.category).order_by('id')
         return queryset
 
@@ -143,15 +147,15 @@ class ContactsView(AjaxableResponseMixin, CreateView):
     http_method_names = ['get', 'post']
     template_name = 'news/contacts.html'
 
-    def form_valid(self, form):
+    def form_valid(self, form: BaseForm) -> HttpResponse:
         response = super(ContactsView, self).form_valid(form)
         form.send_mail()
         return response
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
         context['contacts'] = Contact.objects.order_by('id')
         return context
 
-    def get_success_url(self):
+    def get_success_url(self) -> Url:
         return reverse('news:contacts')
