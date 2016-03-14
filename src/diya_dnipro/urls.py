@@ -26,8 +26,8 @@ from diya_dnipro.sitemaps import SITEMAPS
 admin.site.site_header = admin.site.site_title = 'Файна адмінка'
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls, {'SSL': True}),
-    url(r'^admin/ckeditor/', include('ckeditor_uploader.urls'), {'SSL': True}),
+    url(r'^admin/', admin.site.urls),
+    url(r'^admin/ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='misc/robots.txt', content_type='text/plain'),
         name='robots'),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': SITEMAPS}, name='sitemap'),
