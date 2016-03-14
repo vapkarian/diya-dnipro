@@ -99,9 +99,9 @@
                     <li class="nav-item" aria-haspopup="true">
                         {{ elem.title }}
                         <ul>
-                            <li><a href="{% url 'news:category' url=elem.url %}">Новини</a></li>
-                            <li><a href="{% url 'news:team' url=elem.url %}">Команда</a></li>
-                            <li><a href="{% url 'news:documents' url=elem.url %}">Документи</a></li>
+                            <li><a href="{% url 'news:category' url=elem.url %}" aria-haspopup="false">Новини</a></li>
+                            <li><a href="{% url 'news:team' url=elem.url %}" aria-haspopup="false">Команда</a></li>
+                            <li><a href="{% url 'news:documents' url=elem.url %}" aria-haspopup="false">Документи</a></li>
                         </ul>
                     </li>
                 {% endfor %}
