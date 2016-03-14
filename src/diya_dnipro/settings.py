@@ -58,6 +58,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE_CLASSES = [
+    'ssl_redirect.middleware.SSLRedirectMiddleware',
     # 'django.middleware.cache.UpdateCacheMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.middleware.common.BrokenLinkEmailsMiddleware',
