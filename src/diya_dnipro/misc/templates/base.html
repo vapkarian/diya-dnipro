@@ -96,7 +96,7 @@
                     <a href="{% url 'news:home' %}">Головна</a>
                 </li>
                 {% for elem in navigation_links %}
-                    <li class="nav-item">
+                    <li class="nav-item" aria-haspopup="true">
                         {{ elem.title }}
                         <ul>
                             <li><a href="{% url 'news:category' url=elem.url %}">Новини</a></li>
