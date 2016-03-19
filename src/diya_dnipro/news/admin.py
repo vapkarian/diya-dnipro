@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from diya_dnipro.news.models import *
 
 

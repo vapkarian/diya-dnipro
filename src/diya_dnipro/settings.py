@@ -58,6 +58,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE_CLASSES = [
+    'diya_dnipro.accounts.middleware.BetaTestingMiddleware',
     # 'django.middleware.cache.UpdateCacheMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.middleware.common.BrokenLinkEmailsMiddleware',
