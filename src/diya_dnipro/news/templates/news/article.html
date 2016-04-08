@@ -14,7 +14,7 @@
 {% endblock open_tag_description %}
 {% block open_tag_image %}
     {% if article.image %}
-        <meta property="og:image" content="{% add_host %}{{ request.get_host }}{{ article.image.url }}" />
+        <meta property="og:image" content="{% add_host %}{{ article.image.url }}" />
     {% else %}
         {{ block.super }}
     {% endif %}
