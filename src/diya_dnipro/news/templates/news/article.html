@@ -12,7 +12,7 @@
 {% endif %}
 {% if article.image %}
     {% block open_tag_image %}
-        <meta property="og:image" content="{{ article.image.url }}" />
+        <meta property="og:image" content="{{ request.get_host }}{{ article.image.url }}" />
     {% endblock open_tag_image %}
 {% endif %}
 {% block title %}{{ article.title }} | {{ block.super }}{% endblock title %}
