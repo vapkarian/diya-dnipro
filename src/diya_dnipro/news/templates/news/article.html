@@ -1,4 +1,4 @@
-{% extends "news/base.html" %}
+{% extends "news/base.html" %}{% load static from staticfiles %}
 {% block open_tag_type %}
     <meta property="og:type" content="article" />
 {% endblock open_tag_type %}
@@ -12,7 +12,7 @@
 {% endif %}
 {% if article.image %}
     {% block open_tag_image %}
-        <meta property="og:image" content="{% static 'misc/img/open-tag-image.jpg' %}" />
+        <meta property="og:image" content="{{ article.image.url }}" />
     {% endblock open_tag_image %}
 {% endif %}
 {% block title %}{{ article.title }} | {{ block.super }}{% endblock title %}

@@ -38,6 +38,5 @@ class BetaTestingMiddleware(object):
     """
 
     def process_view(self, request: HttpRequest, view_func: Callable, view_args: list, view_kwargs: dict):
-        print(view_kwargs.get('beta_testing', False))
         if view_kwargs.get('beta_testing', False) and not getattr(request.user, 'is_beta', False):
             raise PermissionDenied
