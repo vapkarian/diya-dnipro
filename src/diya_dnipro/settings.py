@@ -51,8 +51,8 @@ INSTALLED_APPS = [
     'dbdump',
     'sortedm2m',
     'easy_thumbnails',
-    'diya_dnipro.accounts',
     'diya_dnipro.misc',
+    'diya_dnipro.accounts',
     'diya_dnipro.news',
     'diya_dnipro.shop',
 ]

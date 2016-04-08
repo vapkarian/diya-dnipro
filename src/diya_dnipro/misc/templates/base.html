@@ -1,4 +1,4 @@
-{% load static from staticfiles %}{% load compress %}
+{% load static from staticfiles %}{% load compress %}{% load add_host %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +17,7 @@
         <meta property="og:description" content="" />
     {% endblock open_tag_description %}
     {% block open_tag_image %}
-        <meta property="og:image" content="{{ request.get_host }}{% static 'misc/img/open-tag-image.jpg' %}" />
+        <meta property="og:image" content="{% add_host %}{% static 'misc/img/open-tag-image.jpg' %}" />
     {% endblock open_tag_image %}
     <title>
         {% block title %}Національний рух Дмитра Яроша{% endblock title %}
