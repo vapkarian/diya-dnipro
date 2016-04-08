@@ -10,7 +10,7 @@
         <div class="row">
             {% if article.image %}
                 <a class="article-image" href="{{ article.image.url }}" target="_blank">
-                    <img alt="Зображення" src="{{ article.image.url }}"/>
+                    <img rel="image_src" alt="Зображення" src="{{ article.image.url }}"/>
                 </a>
             {% endif %}
             <div class="article-title">{{ article.title }}</div>
