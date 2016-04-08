@@ -5,6 +5,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1100, initial-scale=1">
+    <meta property="og:site_name" content="Сайт Національного руху «ДІЯ» Дніпропетровської області" />
+    <meta property="og:locale" content="uk_UA" />
+    {% block open_tag_type %}
+        <meta property="og:type" content="website" />
+    {% endblock open_tag_type %}
+    {% block open_tag_title %}
+        <meta property="og:title" content="" />
+    {% endblock open_tag_title %}
+    {% block open_tag_description %}
+        <meta property="og:description" content="" />
+    {% endblock open_tag_description %}
+    {% block open_tag_image %}
+        <meta property="og:image" content="{% static 'misc/img/open-tag-image.jpg' %}" />
+    {% endblock open_tag_image %}
     <title>
         {% block title %}Національний рух Дмитра Яроша{% endblock title %}
     </title>

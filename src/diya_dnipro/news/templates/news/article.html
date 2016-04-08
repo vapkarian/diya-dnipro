@@ -1,4 +1,20 @@
 {% extends "news/base.html" %}
+{% block open_tag_type %}
+    <meta property="og:type" content="article" />
+{% endblock open_tag_type %}
+{% block open_tag_title %}
+    <meta property="og:title" content="{{ article.title }}" />
+{% endblock open_tag_title %}
+{% if article.text %}
+    {% block open_tag_description %}
+        <meta property="og:description" content="{{ article.text|striptags|safe|slice:':100' }}" />
+    {% endblock open_tag_description %}
+{% endif %}
+{% if article.image %}
+    {% block open_tag_image %}
+        <meta property="og:image" content="{% static 'misc/img/open-tag-image.jpg' %}" />
+    {% endblock open_tag_image %}
+{% endif %}
 {% block title %}{{ article.title }} | {{ block.super }}{% endblock title %}
 {% block content %}
     <article>
