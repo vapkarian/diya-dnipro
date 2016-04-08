@@ -5,16 +5,21 @@
 {% block open_tag_title %}
     <meta property="og:title" content="{{ article.title }}" />
 {% endblock open_tag_title %}
-{% if article.text %}
-    {% block open_tag_description %}
-        <meta property="og:description" content="{{ article.text|striptags|safe|slice:':100' }}" />
-    {% endblock open_tag_description %}
-{% endif %}
-{% if article.image %}
-    {% block open_tag_image %}
+{% block open_tag_description %}
+    {% if article.text %}
+        <meta property="og:description" content="{{ article.text|striptags|safe|slice:':100' }}..." />
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock open_tag_description %}
+{% block open_tag_image %}
+    {% if article.image %}
         <meta property="og:image" content="{{ request.get_host }}{{ article.image.url }}" />
-    {% endblock open_tag_image %}
-{% endif %}
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock open_tag_image %}
+
 {% block title %}{{ article.title }} | {{ block.super }}{% endblock title %}
 {% block content %}
     <article>
