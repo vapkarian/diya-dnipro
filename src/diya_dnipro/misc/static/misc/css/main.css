@@ -101,13 +101,18 @@ footer .logo {
 
 header .title,
 footer .title {
-    font-size: 20pt;
+    font-size: 18pt;
     text-align: center;
     color: white;
     float: left;
-    margin: 25px 0;
-    width: 240px;
+    margin: 25px 0 10px;
+    width: 300px;
     text-transform: uppercase;
+}
+
+header .title .sub-title,
+footer .title .sub-title {
+    font-size: 13pt;
 }
 
 header .title .sub-title {
@@ -164,7 +169,7 @@ footer .icons {
 
 footer .icons {
     float: right;
-    margin: 0 25px;
+    margin: 0 55px;
 }
 
 header .icons a,
@@ -274,7 +279,7 @@ header .nav-item.alone {
 }
 
 footer .logo-icons {
-    width: 315px;
+    width: 375px;
     float: left;
 }
 
