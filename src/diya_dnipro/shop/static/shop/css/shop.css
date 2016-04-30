@@ -1,0 +1,56 @@
+.content .shop-list {
+    overflow: hidden;
+    float: left;
+    width: 748px;
+    margin-top: 20px;
+}
+
+.content .shop-list .shop-title,
+.content .shop-list .shop-best {
+    border: 2px solid #414141;
+    width: 720px;
+    box-sizing: border-box;
+    background-color: #fff;
+    height: 50px;
+    overflow: hidden;
+    clear:both;
+}
+
+.content .shop-list .shop-best {
+    height: 70px;
+}
+
+.content .shop-list .shop-title h4,
+.content .shop-list .shop-best h4 {
+    font-family: "Blagovest", "Times New Roman", serif;
+    float: left;
+    color: black;
+    line-height: 45px;
+    height: 50px;
+    padding-left: 10px;
+}
+
+.content .shop-list .shop-best h4 {
+    line-height: 75px;
+}
+
+.content .shop-list .container {
+    border: 2px solid #414141;
+    float: left;
+    width: 240px;
+    box-sizing: border-box;
+    background-color: #fff;
+    height: 260px;
+    overflow: hidden;
+}
+
+.content .shop-list .container .category-title {
+    text-align: center;
+    color: black;
+    padding: 10px;
+}
+
+.content .shop-list .container .category-image {
+    width: 236px;
+    height: 220px;
+}

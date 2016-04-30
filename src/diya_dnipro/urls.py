@@ -32,6 +32,7 @@ urlpatterns = [
         name='robots'),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': SITEMAPS}, name='sitemap'),
     url(r'^', include('diya_dnipro.news.urls', namespace='news')),
+    url(r'^shop/', include('diya_dnipro.shop.urls', namespace='shop'), {'beta_testing': True}),
 ]
 
 if settings.DEBUG:

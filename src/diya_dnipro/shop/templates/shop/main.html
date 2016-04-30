@@ -1,0 +1,49 @@
+{% extends "shop/base.html" %}{% load static from staticfiles %}
+{% block title %}Крамничка | {{ block.super }}{% endblock title %}
+{% block content %}
+    <h1>Крамничка</h1>
+    <div class="shop-list">
+        <div class="shop-title">
+            <h4>Категорії</h4>
+        </div>
+        {% for category in categories %}
+            <div class="container">
+                <a href="{{ category.get_absolute_url }}">
+                    <p class="category-title">{{ category.title }}</p>
+                    <img class="category-image" alt="Зображення" src="{{ category.image.url }}" width="236"
+                         height="220"/>
+                </a>
+            </div>
+        {% endfor %}
+        <div class="shop-best">
+            <h4>Кращі товари</h4>
+        </div>
+        {% for item in items %}
+            <div class="container">
+                <img alt="Зображення" src="{{ item.image.url }}"/>
+                <p class="price-value">Ціна:</p>
+                <p class="price-value">{{ item.price|floatformat:2 }} ГРН.</p>
+                <div class="more-details">Докладніше</div>
+            </div>
+            {#            <div class="article-preview">#}
+            {#                <div class="left-side">#}
+            {#                    <a href="{{ article.get_absolute_url }}">#}
+            {#                        <img alt="Зображення" src="{{ article.preview_thumbnail }}" width="127" height="95"/>#}
+            {#                    </a>#}
+            {#                    <div class="short-article-datetime">#}
+            {#                        <div class="short-article-time">{{ article.created|date:"H:i" }}</div>#}
+            {#                        <div class="short-article-date">{{ article.created|date:"d.m.Y" }}</div>#}
+            {#                    </div>#}
+            {#                </div>#}
+            {#                <div class="right-side">#}
+            {#                    <a href="{{ article.get_absolute_url }}">#}
+            {#                        <div class="article-title">{{ article.title }}</div>#}
+            {#                    </a>#}
+            {#                    <div class="article-text">{{ article.text|striptags|safe|slice:":100" }}...</div>#}
+            {#                </div>#}
+            {#            </div>#}
+        {% endfor %}
+        {% url 'shop:category' url=category.url as target_url %}
+        {% include 'misc/parts/pagination.html' with target_url=target_url page_obj=page_obj only %}
+    </div>
+{% endblock content %}
