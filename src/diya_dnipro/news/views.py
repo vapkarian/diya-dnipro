@@ -6,10 +6,9 @@ from django.db.models import QuerySet
 from django.forms import BaseForm
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView
 
 from diya_dnipro.accounts.forms import FeedbackForm
-from diya_dnipro.misc.search import get_query
 from diya_dnipro.misc.utils import AjaxableResponseMixin
 from diya_dnipro.news.models import *
 
@@ -68,31 +67,9 @@ class CategoryView(SectionView):
         return queryset
 
 
-class SearchView(ListView):
-    context_object_name = 'articles'
+class SearchView(TemplateView):
     http_method_names = ['get']
-    paginate_by = 10
     template_name = 'news/search.html'
-    search_query = None
-
-    def dispatch(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
-        self.search_query = self.request.GET.get('search', '')
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs) -> dict:
-        context = super().get_context_data(**kwargs)
-        context['search_query'] = self.search_query
-        return context
-
-    def get_queryset(self) -> QuerySet:
-        search_query = self.search_query
-        entry_query = get_query(search_query, ['title', 'text'])
-        queryset = Article.objects.filter(is_active=True).order_by('-created')
-        if entry_query is None:
-            queryset = queryset.none()
-        else:
-            queryset = queryset.filter(entry_query).distinct()
-        return queryset
 
 
 class ArticleView(DetailView):

@@ -1,0 +1,8 @@
+.content .custom-search-engine input,
+.content .custom-search-engine textarea {
+    box-sizing: content-box;
+    color: black;
+    min-height: unset;
+    border-radius: 0;
+    font-family: inherit;
+}

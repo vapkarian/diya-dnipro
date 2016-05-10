@@ -1,8 +1,23 @@
-{% extends "news/base.html" %}
+{% extends "news/base.html" %}{% load static from staticfiles %}
 {% block title %}Результати пошуку | {{ block.super }}{% endblock title %}
+{% block extra-css %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/reset-cse.css' %}" />
+{% endblock extra-css %}
 {% block content %}
     <h1>Результати пошуку</h1>
-    {% include 'news/parts/news-list.html' with articles=articles only %}
-    {% url 'news:search' search_query=search_query as target_url %}
-    {% include 'misc/parts/pagination.html' with target_url=target_url page_obj=page_obj get_uqery='search='|add:search_query only %}
+    <div class="custom-search-engine">
+        <script>
+            (function () {
+                var cx = '{{ settings.GOOGLE_CSE_ACCOUNT }}';
+                var gcse = document.createElement('script');
+                gcse.type = 'text/javascript';
+                gcse.async = true;
+                gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(gcse, s);
+            })();
+        </script>
+        <gcse:search></gcse:search>
+    </div>
 {% endblock content %}

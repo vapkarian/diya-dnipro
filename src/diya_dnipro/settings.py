@@ -94,6 +94,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'diya_dnipro.misc.context_processors.social_icons',
+                'diya_dnipro.misc.context_processors.settings_constants',
                 'diya_dnipro.news.context_processors.navigation_links',
                 'diya_dnipro.news.context_processors.last_articles',
                 'diya_dnipro.news.context_processors.top_articles',
@@ -222,6 +223,9 @@ THUMBNAIL_ALIASES = {
         'preview': {'size': (127, 95), 'crop': ',0'},
     },
 }
+
+
+GOOGLE_CSE_ACCOUNT = ''
 
 
 try:
